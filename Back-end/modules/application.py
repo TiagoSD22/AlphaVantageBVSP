@@ -1,3 +1,4 @@
+from itertools import islice
 from flask import Flask
 from flask_restful import Resource, Api
 from flask_cors import CORS
@@ -17,7 +18,7 @@ def getBvspIntraDay(timeInterval : int):
     try:
         validateTimeIntervalValue(timeInterval)
     except Exception as exceptionMessage:
-        return str(exceptionMessage)
+        return make_response(str(exceptionMessage), 406)
 
     parameters : str = ""
     function : str = "TIME_SERIES_INTRADAY" #parâmetro para intraday do alpha vantage
@@ -35,15 +36,11 @@ def getBvspIntraDay(timeInterval : int):
 
     response = requests.get('https://www.alphavantage.co/query?' + parameters)
     jsonResponse : dict = response.json() #em python, ao desserializar o json do response o objeto é do tipo dict
-    timeStampsData = list(jsonResponse.values())[1:]#os dados da série estão a partir do segunda valor que corresponde à chave Time Stamps 
-    stockDataList : list = stockQuoteDataBusiness.convertListDict2ListStock(timeStampsData)
-    #s = json.dumps(l[0])
-    #response = jsonify(stockDataList)
-    #response.status_code = 200
-    #return make_response(jsonify({"timeStamps" : stockData.toJSON() for stockData in stockDataList}), 200)
-    print("Lista: ", stockDataList.__len__())
-    s = json.dumps([stock.toJSON() for stock in stockDataList])
-    return s
+    metadata, timeStampsData = islice(jsonResponse.values(), 2)#os dados da série estão a partir do segunda valor que corresponde à chave Time Stamps 
+
+    stockDataList : list = stockQuoteDataBusiness.convertDictToStockQuoteDataList(timeStampsData)
+    jsonResponse = json.dumps([stock.toJSON() for stock in stockDataList])
+    return make_response(jsonResponse, 200)
 
 def validateTimeIntervalValue(value : int):
     if(value not in supportedTimeIntervals):

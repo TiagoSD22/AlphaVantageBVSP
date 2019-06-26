@@ -7,7 +7,8 @@ from enums.stockQuoteDataEnum import StockQuoteDataEnum
 # e o valor é um json com as chaves e valores correspondentes às informações da operação, que são:
 # valor de abertura, alta, baixa, fechamento e volume. Esta rotina converte uma entrada desse tipo de dicionário
 # para um objeto da classe StockQuoteData 
-def convertDictToStockQuoteData(dictionary : dict):
+def convertDictToStockQuoteDataList(dictionary : dict):
+    outputList : list = []
     stock = StockQuoteData()
     for key, value in dictionary.items():
         stock.setTimeStamp(datetime.strptime(key,"%Y-%m-%d %H:%M:%S"))
@@ -16,11 +17,5 @@ def convertDictToStockQuoteData(dictionary : dict):
         stock.setLowValue(value[StockQuoteDataEnum.LOW.value])
         stock.setCloseValue(value[StockQuoteDataEnum.CLOSE.value])
         stock.setVolume(value[StockQuoteDataEnum.VOLUME.value])
-    return stock
-
-#converte uma lista de dicionários retornado pela api alpha vantage para uma lista de objetos StockQuoteData
-def convertListDict2ListStock(listDict : list):
-    output : list = []
-    for dictionary in listDict:
-        output.append(convertDictToStockQuoteData(dictionary))
-    return output
+        outputList.append(stock)
+    return outputList
