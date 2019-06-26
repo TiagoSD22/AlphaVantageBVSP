@@ -22,16 +22,23 @@ def getBvspIntraDay(timeInterval : int):
     interval : str = supportedTimeIntervals[timeInterval]
     outputsize : str = "full" #série completa
     apiKey : str = "M91DUVPKE0907E85" #mudar isso para um arquivo .settings ou .env
+    
     #montando url para chamar a api do alpha vantage
     parameters = "function=" + function
     parameters += "&symbol=" + symbol
     parameters += "&interval=" + interval
     parameters += "&outputsize=" + outputsize
     parameters += "&apikey=" + apiKey
+
     response = requests.get('https://www.alphavantage.co/query?' + parameters)
-    jsonResponse = response.json() #em python, ao desserializar o json do response o objeto é do tipo dict
+    jsonResponse : dict = response.json() #em python, ao desserializar o json do response o objeto é do tipo dict
     timeStampsData = list(jsonResponse.values())[1:]
-    return jsonify(timeStampsData)#os dados da série estão a partir do segunda valor que corresponde à chave Time Stamps 
+    for t in timeStampsData:
+        for k,v in t.items():
+            print("Chave: ", k + " valor: ", v["1. open"])
+    a = json.dumps(timeStampsData)
+    b = json.loads(a)
+    return jsonify(b)#os dados da série estão a partir do segunda valor que corresponde à chave Time Stamps 
 
 def validateTimeIntervalValue(value : int):
     if(value not in supportedTimeIntervals):
