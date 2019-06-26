@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from models.stockQuoteData import StockQuoteData
 from enums.stockQuoteDataEnum import StockQuoteDataEnum
 
@@ -9,11 +9,18 @@ from enums.stockQuoteDataEnum import StockQuoteDataEnum
 # para um objeto da classe StockQuoteData 
 def convertDictToStockQuoteData(dictionary : dict):
     stock = StockQuoteData()
-    for key, value in d.items():
-        stock.setTimeStamp(datetime.strptime(key,"%y-%m-%d %H:%M:%s"))
+    for key, value in dictionary.items():
+        stock.setTimeStamp(datetime.strptime(key,"%Y-%m-%d %H:%M:%S"))
         stock.setOpenValue(value[StockQuoteDataEnum.OPEN.value])
         stock.setHighValue(value[StockQuoteDataEnum.HIGH.value])
         stock.setLowValue(value[StockQuoteDataEnum.LOW.value])
         stock.setCloseValue(value[StockQuoteDataEnum.CLOSE.value])
         stock.setVolume(value[StockQuoteDataEnum.VOLUME.value])
     return stock
+
+#converte uma lista de dicionários retornado pela api alpha vantage para uma lista de objetos StockQuoteData
+def convertListDict2ListStock(listDict : list):
+    output : list = []
+    for dictionary in listDict:
+        output.append(convertDictToStockQuoteData(dictionary))
+    return output

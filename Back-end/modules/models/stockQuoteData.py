@@ -1,7 +1,7 @@
 import datetime
 
 class StockQuoteData:
-    def __init__(self, timeStamp : datetime, openValue : float, highValue : float, lowValue : float, closeValue : float, volume : float):
+    def __init__(self, timeStamp : datetime = datetime.date.today(), openValue : float = 0, highValue : float = 0, lowValue : float = 0, closeValue : float = 0, volume : float = 0):
         self.__timeStamp = timeStamp
         self.__open = openValue
         self.__high = highValue
@@ -9,38 +9,49 @@ class StockQuoteData:
         self.__close = closeValue
         self.__volume = volume
     
-    def getTimeStamp() :
+    def getTimeStamp(self) :
         return self.__timeStamp
     
-    def setTimeStamp(timeStamp : datetime):
+    def setTimeStamp(self,timeStamp : datetime):
         self.__timeStamp = timeStamp
     
-    def getOpenValue():
+    def getOpenValue(self):
         return self.__open
     
-    def setOpenValue(openValue : float):
+    def setOpenValue(self,openValue : float):
         self.__open = openValue
     
-    def getHighValue():
+    def getHighValue(self):
         return self.__high
     
-    def setHighValue(highValue : float):
+    def setHighValue(self,highValue : float):
         self.__high = highValue
     
-    def getLowValue():
+    def getLowValue(self):
         return self.__low
     
-    def setLowValue(lowValue : float):
+    def setLowValue(self,lowValue : float):
         self.__low = lowValue
     
-    def getCloseValue():
+    def getCloseValue(self):
         return self.__close
     
-    def setCloseValue(closeValue : float):
+    def setCloseValue(self,closeValue : float):
         self.__close = closeValue
     
-    def getVolume():
+    def getVolume(self):
         return self.__volume
     
-    def setVolume(volume : float):
+    def setVolume(self,volume : float):
         self.__volume = volume
+    
+    def toJSON(self):
+        data = {
+            "timeStamp"  : "25-06-19 16:00:00",
+            "openValue"  : self.getOpenValue(),
+            "highValue"  : self.getHighValue(),
+            "lowValue"   : self.getLowValue(),
+            "closeValue" : self.getCloseValue(),
+            "volume"     : self.getVolume()
+        }
+        return data
