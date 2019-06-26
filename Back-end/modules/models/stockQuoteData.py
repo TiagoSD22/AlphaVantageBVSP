@@ -12,7 +12,7 @@ class StockQuoteData:
     def getTimeStamp() :
         return self.__timeStamp
     
-    def setTimeStamp(timeStamp : dateTime):
+    def setTimeStamp(timeStamp : datetime):
         self.__timeStamp = timeStamp
     
     def getOpenValue():
