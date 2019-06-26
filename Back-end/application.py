@@ -5,6 +5,7 @@ from flask import jsonify
 import requests
 import json
 from models.supportedTimeIntervals import supportedTimeIntervals
+from enums.stockQuoteDataEnum import StockQuoteDataEnum
 
 app = Flask(__name__)
 CORS(app)
@@ -32,13 +33,10 @@ def getBvspIntraDay(timeInterval : int):
 
     response = requests.get('https://www.alphavantage.co/query?' + parameters)
     jsonResponse : dict = response.json() #em python, ao desserializar o json do response o objeto é do tipo dict
-    timeStampsData = list(jsonResponse.values())[1:]
-    for t in timeStampsData:
-        for k,v in t.items():
-            print("Chave: ", k + " valor: ", v["1. open"])
-    a = json.dumps(timeStampsData)
-    b = json.loads(a)
-    return jsonify(b)#os dados da série estão a partir do segunda valor que corresponde à chave Time Stamps 
+    timeStampsData = list(jsonResponse.values())[1:]#os dados da série estão a partir do segunda valor que corresponde à chave Time Stamps 
+    
+   
+    return jsonify(jsonResponse)
 
 def validateTimeIntervalValue(value : int):
     if(value not in supportedTimeIntervals):
