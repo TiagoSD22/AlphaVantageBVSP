@@ -9,8 +9,8 @@ from enums.stockQuoteDataEnum import StockQuoteDataEnum
 # para um objeto da classe StockQuoteData 
 def convertDictToStockQuoteDataList(dictionary : dict):
     outputList : list = []
-    stock = StockQuoteData()
     for key, value in dictionary.items():
+        stock = StockQuoteData()
         stock.setTimeStamp(datetime.strptime(key,"%Y-%m-%d %H:%M:%S"))
         stock.setOpenValue(value[StockQuoteDataEnum.OPEN.value])
         stock.setHighValue(value[StockQuoteDataEnum.HIGH.value])
