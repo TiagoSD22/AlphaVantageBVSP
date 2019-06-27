@@ -19,3 +19,10 @@ def convertDictToStockQuoteDataList(dictionary : dict):
         stock.setVolume(value[StockQuoteDataEnum.VOLUME.value])
         outputList.append(stock)
     return outputList
+
+# a api do alpha vantage retorna uma série que pode ser além do último dia ao solicitar o intraday, assim 
+# para uma série intraday do dia 26, pode haver dados dos dias 25, 24 ou até muito antes, este método retorna
+# apenas a série referente ao último dia
+def getOnlyLastDailyData(stockList : list):
+    lastDaily : list = filter(lambda stock : stock.getTimeStamp().day == stockList[0].getTimeStamp().day, stockList)
+    return lastDaily

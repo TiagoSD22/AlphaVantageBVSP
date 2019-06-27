@@ -39,7 +39,9 @@ def getBvspIntraDay(timeInterval : int):
     metadata, timeStampsData = islice(jsonResponse.values(), 2)#os dados da série estão a partir do segunda valor que corresponde à chave Time Stamps 
 
     stockDataList : list = stockQuoteDataBusiness.convertDictToStockQuoteDataList(timeStampsData)
+    stockDataList = stockQuoteDataBusiness.getOnlyLastDailyData(stockDataList)
     jsonResponse = json.dumps([stock.toJSON() for stock in stockDataList])
+    stockQuoteDataBusiness.getOnlyLastDailyData(stockDataList)
     return make_response(jsonResponse, 200)
 
 def validateTimeIntervalValue(value : int):
