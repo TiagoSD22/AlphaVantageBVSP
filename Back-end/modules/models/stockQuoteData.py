@@ -49,7 +49,6 @@ class StockQuoteData:
         return self.__timeStamp.strftime("%m-%d-%y %H:%M:%S")
     
     def toJSON(self):
-        print("Data: ", self.__timeStamp)
         data = {
             "timeStamp"  : self.getFormatedTimeStamp(),
             "open"  : self.__open,

@@ -1,3 +1,4 @@
+import config
 from itertools import islice
 from flask import Flask
 from flask_restful import Resource, Api
@@ -6,14 +7,14 @@ from flask import jsonify
 from flask import make_response
 import requests
 import json
-from models.supportedTimeIntervals import supportedTimeIntervals
-from models.stockQuoteData import StockQuoteData
-from business import stockQuoteDataBusiness
+from modules.models.supportedTimeIntervals import supportedTimeIntervals
+from modules.models.stockQuoteData import StockQuoteData
+from modules.business import stockQuoteDataBusiness
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/bvsp-intraday/<int:timeInterval>', methods=['GET'])
+@app.route("/bvsp-intraday/<int:timeInterval>", methods=["GET"])
 def getBvspIntraDay(timeInterval : int):
     try:
         validateTimeIntervalValue(timeInterval)
@@ -25,7 +26,7 @@ def getBvspIntraDay(timeInterval : int):
     symbol : str = "^BVSP" #símbolo para o Bovespa no alpha vantage
     interval : str = supportedTimeIntervals[timeInterval]
     outputsize : str = "full" #série completa
-    apiKey : str = "M91DUVPKE0907E85" #mudar isso para um arquivo .settings ou .env
+    apiKey : str = config.api_key
     
     #montando url para chamar a api do alpha vantage
     parameters = "function=" + function
@@ -43,6 +44,10 @@ def getBvspIntraDay(timeInterval : int):
     jsonResponse = json.dumps([stock.toJSON() for stock in stockDataList])
     stockQuoteDataBusiness.getOnlyLastDailyData(stockDataList)
     return make_response(jsonResponse, 200)
+
+@app.route("/get-top-10", methods=["GET"])
+def getTop10():
+    return make_response("oi", 200)
 
 def validateTimeIntervalValue(value : int):
     if(value not in supportedTimeIntervals):

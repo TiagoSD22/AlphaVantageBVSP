@@ -1,6 +1,6 @@
 from datetime import datetime
-from models.stockQuoteData import StockQuoteData
-from enums.stockQuoteDataEnum import StockQuoteDataEnum
+from modules.models.stockQuoteData import StockQuoteData
+from modules.enums.stockQuoteDataEnum import StockQuoteDataEnum
 
 # o response da api do alpha vantage retorna um json que é tratado e convertido para uma lista de dicionários
 # cada dicionário corresponde a uma operação (stock quote data) em que a chave é o timestamp da operação
