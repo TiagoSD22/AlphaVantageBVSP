@@ -6,6 +6,7 @@ import br from '@angular/common/locales/br';
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import stock from 'highcharts/modules/stock.src';
 import more from 'highcharts/highcharts-more.src';
+import {MatCardModule} from '@angular/material/card';
 
 registerLocaleData(br, 'pt-BR');
 
@@ -17,7 +18,8 @@ export function highchartsModules() {
 @NgModule({
   imports: [
     CommonModule,
-    ChartModule
+    ChartModule,
+    MatCardModule
   ],
   declarations: [CotacaoBovespaComponent],
   providers: [
