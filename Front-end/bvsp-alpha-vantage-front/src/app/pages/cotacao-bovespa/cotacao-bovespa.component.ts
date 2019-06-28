@@ -24,6 +24,7 @@ export class CotacaoBovespaComponent implements OnInit, AfterViewInit {
   variationPercent : number = 0;
   lastUpdateDate : string = "";
   loading : boolean = true;
+  timeInterval : number = 1;
 
   constructor(private router : Router, 
               private cotacaoService : CotacaoBovespaService, 
@@ -68,7 +69,7 @@ export class CotacaoBovespaComponent implements OnInit, AfterViewInit {
   }
 
   getBvspIntraday() {
-    this.cotacaoService.calculateIntraday(5).subscribe(res => {
+    this.cotacaoService.calculateIntraday(this.timeInterval).subscribe(res => {
       this.toastr.success("Dados do Bovespa recebidos!", "OK");
       this.stockData = res.reverse();
       this.getDailyValues();
