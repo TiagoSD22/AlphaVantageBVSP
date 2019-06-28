@@ -5,8 +5,8 @@ import { EmpresasComponent } from "./pages/empresas/empresas.component";
 
 const routes: Route[] = [
   {path : "cotacao-bovespa", component : CotacaoBovespaComponent},
-  {path : "", component : CotacaoBovespaComponent},
-  {path : "empresas", component : EmpresasComponent}
+  {path : "empresas", component : EmpresasComponent},
+  {path : "", redirectTo : "cotacao-bovespa", pathMatch: 'full'}
 ];
 
 @NgModule({

@@ -1,11 +1,9 @@
 import { StockChart } from 'angular-highcharts';
-import { HighchartsService } from './../../shared/services/highcharts.service';
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CotacaoBovespaService } from './cotacao-bovespa.service';
 import { StockQuoteData } from '../../models/stock-quote-data';
 import { ToastrService } from 'ngx-toastr';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-cotacao-bovespa',
@@ -27,8 +25,7 @@ export class CotacaoBovespaComponent implements OnInit, AfterViewInit {
   timeInterval : number = 1;
 
   constructor(private router : Router, 
-              private cotacaoService : CotacaoBovespaService, 
-              private highcharts: HighchartsService,
+              private cotacaoService : CotacaoBovespaService,
               private toastr : ToastrService) { }
   
   ngOnInit() {
