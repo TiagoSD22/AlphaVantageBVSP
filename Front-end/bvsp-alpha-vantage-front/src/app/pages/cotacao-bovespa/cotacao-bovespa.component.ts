@@ -39,6 +39,11 @@ export class CotacaoBovespaComponent implements OnInit, AfterViewInit {
       /*chart: {
         backgroundColor: '#19231A'
       },*/
+      plotOptions: {
+        line:{
+          color: "blue"
+        }
+      },
       time: {
         useUTC: true,
         timezoneOffset: 180
@@ -92,6 +97,8 @@ export class CotacaoBovespaComponent implements OnInit, AfterViewInit {
     data.forEach(d => {
       this.stock.options.series[0].data.push([d[0], d[1]]);
     })
+
+    this.stock.options.plotOptions.line.color = this.variation > 0? "green" : "red";
   }
 
 }

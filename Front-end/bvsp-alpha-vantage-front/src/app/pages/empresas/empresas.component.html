@@ -1,3 +1,7 @@
-<p>
-  empresas works!
-</p>
+<div *ngIf="loading" class="load-wrapper">
+  <div class="lds-circle"><div></div></div>
+</div>
+
+<div *ngIf="!loading">
+
+</div>
