@@ -46,16 +46,16 @@ class StockQuoteData:
         self.__volume = volume
     
     def getFormatedTimeStamp(self):
-        return self.__timeStamp.strftime("%d/%m/%y %H:%M:%S")
+        return self.__timeStamp.strftime("%m-%d-%y %H:%M:%S")
     
     def toJSON(self):
         print("Data: ", self.__timeStamp)
         data = {
             "timeStamp"  : self.getFormatedTimeStamp(),
-            "openValue"  : self.__open,
-            "highValue"  : self.__high,
-            "lowValue"   : self.__low,
-            "closeValue" : self.__close,
-            "volume"     : self.__volume
+            "open"  : self.__open,
+            "high"  : self.__high,
+            "low"   : self.__low,
+            "close" : self.__close,
+            "volume": self.__volume
         }
         return data
