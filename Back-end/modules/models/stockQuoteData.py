@@ -1,7 +1,12 @@
 import datetime
 
 class StockQuoteData:
-    def __init__(self, timeStamp : datetime = datetime.date.today(), openValue : float = 0, highValue : float = 0, lowValue : float = 0, closeValue : float = 0, volume : float = 0):
+    def __init__(self, timeStamp : datetime = datetime.date.today(), 
+                       openValue : float = 0, 
+                       highValue : float = 0, 
+                       lowValue : float = 0, 
+                       closeValue : float = 0, 
+                       volume : float = 0):
         self.__timeStamp = timeStamp
         self.__open = openValue
         self.__high = highValue

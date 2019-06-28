@@ -14,6 +14,9 @@ from modules.business import stockQuoteDataBusiness
 app = Flask(__name__)
 CORS(app)
 
+#método para retornar a série da dados do ibovespa no dia atual (intraday)
+# @params: timeInterval : valor de tempo para o intervalo de dados utilizado pela api do alpha vantage
+# @output: stockDataList : um JSON contendo a lista de ações diárias do ibovespa
 @app.route("/bvsp-intraday/<int:timeInterval>", methods=["GET"])
 def getBvspIntraDay(timeInterval : int):
     try:
@@ -24,7 +27,7 @@ def getBvspIntraDay(timeInterval : int):
     parameters : str = ""
     function : str = "TIME_SERIES_INTRADAY" #parâmetro para intraday do alpha vantage
     symbol : str = "^BVSP" #símbolo para o Bovespa no alpha vantage
-    interval : str = supportedTimeIntervals[timeInterval]
+    interval : str = supportedTimeIntervals[timeInterval] #obtém a string reconhecida pela api do alpha vantage
     outputsize : str = "full" #série completa
     apiKey : str = config.api_key
     
