@@ -1,0 +1,42 @@
+<div *ngIf="loading" class="load-wrapper">
+    <div class="lds-circle"><div></div></div>
+</div>
+
+<div *ngIf="!loading">
+    <h3 class="title">
+        BOLSA DE VALORES
+    </h3>
+    <div>
+        <div class="row">
+            <div class="col value-info-div">
+                <h5 class="value-info">Pontos <br> {{close | number : '1.2-2'}}</h5>
+            </div>
+            <div class="col value-info-div">
+                <h5 class="value-info">Abertura <br>{{open | number : '1.2-2'}}</h5>
+            </div>
+            <div class="col value-info-div">
+                <h5 class="value-info">Alta <br>{{high | number : '1.2-2'}}</h5>
+            </div>
+            <div class="col value-info-div">
+                <h5 class="value-info">Baixa <br>{{low | number : '1.2-2'}}</h5>
+            </div>
+            <div class="col value-info-div">
+                <h5 class="value-info" [ngStyle]="{'color': variation >= 0 ? '#85CB33' : '#F56476'}">
+                    Variação<br> {{variation | number : '1.2-2'}}({{variationPercent | number : '1.2-3'}}%)
+                    <i style="vertical-align: middle;" *ngIf="variation < 0" class="material-icons">
+                        arrow_downward
+                    </i>
+                    <i style="vertical-align: middle;" *ngIf="variation > 0" class="material-icons">
+                        arrow_upward
+                    </i>
+                </h5>
+            </div>
+        </div>
+        <div style="margin-left: 20px;">
+            <h5 class="value-info" style="font-size: 12px;color: #BCD39C;">
+                Última atualização: {{lastUpdateDate | date : 'dd/MM/yy, HH:mm:SS'}}
+            </h5>
+        </div>
+        <div [chart]="stock"></div>
+    </div>
+</div>

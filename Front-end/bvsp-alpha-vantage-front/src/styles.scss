@@ -1,0 +1,176 @@
+/*------------------------------------------------------------------------------
+  GERA3- Angular 5
+------------------------------------------------------------------------------*/
+//== mixins
+@import '../node_modules/compass-mixins/lib/animate';
+//== Vendor
+@import '../node_modules/mdi/css/materialdesignicons.css';
+@import '../node_modules/multi-brand-colors/dist/scss/index.scss';
+@import '../node_modules/material-design-iconic-font/dist/css/material-design-iconic-font.css';
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+//== App
+@import "./app/shared/styles/app";
+
+.mat-tab-group-dynamic-height .mat-tab-body-content{
+  overflow:auto !important;
+}
+
+.status-success{
+  background-color:rgba(0,255,0,0.1) !important;
+}
+
+.status-danger{
+  background-color:rgba(255,0,0,0.1) !important;
+}
+
+.status-warning{
+  background-color:rgba(255, 166, 0, 0.1) !important;
+}
+
+::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.4em;
+  background-color: slategray;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px slategray;
+  -webkit-border-radius: 15px;
+  border-radius: 10px;
+  background-color: #28303F;
+}
+
+
+::-webkit-scrollbar-thumb {
+background-color: #3c7fca;
+outline: 1px solid slategrey;
+-webkit-border-radius: 10px;
+border-radius: 10px;
+cursor: move !important;
+}
+
+.mat-tooltip{
+  //background: #1A090D !important;
+  //background: #4A314D !important;
+  //background: #ABEDC6 !important;
+  //background: #0A2239 !important;
+  //background : #132E32 !important;
+  //background: #0D1321 !important;
+  background: rgba(13,19,33,0.6) !important;
+}
+
+#container {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.item {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+}
+
+.item-1 {
+  background-color: #FF3333;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  animation: item-1_move 1.8s cubic-bezier(.6,.01,.4,1) infinite;
+}
+
+.item-2 {
+  background-color: #CCFF99;
+  top: 0;
+  right: 0;
+  animation: item-2_move 1.8s cubic-bezier(.6,.01,.4,1) infinite;
+}
+
+.item-3 {
+  background-color: #66FFFF;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  animation: item-3_move 1.8s cubic-bezier(.6,.01,.4,1) infinite;
+}
+
+.item-4 {
+  background-color: rgba(30, 25, 11, 0.3);
+  bottom: 0;
+  left: 0;
+  animation: item-4_move 1.8s cubic-bezier(.6,.01,.4,1) infinite;
+}
+
+@keyframes item-1_move {
+  0%, 100% {transform: translate(0, 0)} 
+  25% {transform: translate(0, 100px)} 
+  50% {transform: translate(100px, 100px)} 
+  75% {transform: translate(100px, 0)} 
+}
+
+@keyframes item-2_move {
+  0%, 100% {transform: translate(0, 0)} 
+  25% {transform: translate(-100px, 0)} 
+  50% {transform: translate(-100px, 100px)} 
+  75% {transform: translate(0, 100px)} 
+}
+
+@keyframes item-3_move {
+  0%, 100% {transform: translate(0, 0)} 
+  25% {transform: translate(0, -100px)} 
+  50% {transform: translate(-100px, -100px)} 
+  75% {transform: translate(-100px, 0)} 
+}
+
+@keyframes item-4_move {
+  0%, 100% {transform: translate(0, 0)} 
+  25% {transform: translate(100px, 0)} 
+  50% {transform: translate(100px, -100px)} 
+  75% {transform: translate(0, -100px)} 
+}
+
+
+  .swal2-popup {
+    display: none;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    width: 32em;
+    max-width: 100%;
+    padding: 1.25em;
+    border-radius: .3125em;
+    background: #232936 !important;
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.swal2-confirm {
+  background-color: #f3c789 !important; 
+  color: #fff !important;
+  box-shadow: 0 2px 2px 0 rgba(255, 152, 0, 0.14), 0 3px 1px -2px rgba(255, 152, 0, 0.2), 0 1px 5px 0 rgba(255, 152, 0, 0.12) !important;
+}
+
+.swal2-icon.swal2-warning {
+  border-color: #3c7fca !important;
+  color: #3c7fca !important;
+}
+
+.swal2-title{
+  color: #FFFFFF !important;
+}
+
+.swal2-content{
+  color: #FFFFFF !important;
+}
+
+.swal2-popup .swal2-styled.swal2-cancel:hover {
+  background: transparent;
+    color: #3c7fca;
+    border: 1px solid #3c7fca;
+}
