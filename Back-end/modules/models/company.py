@@ -48,14 +48,11 @@ class Company:
     
     def toJSON(self):
         data = {
-            "lastUpdate"  : self.__stock.getFormatedTimeStamp(),
-            "price"  : self.__stock.getPrice(),
             "name"  : self.__name,
             "symbol"   : self.__symbol,
             "region" : self.__region,
             "rank": self.__rank,
             "sector": self.__sector,
-            "change": self.__stock.getChange(),
-            "changePerCent": self.__stock.getChangePercent()
+            "stock" : self.__stock.toJSON()
         }
         return data

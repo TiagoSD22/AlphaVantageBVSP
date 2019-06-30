@@ -46,10 +46,7 @@ async def createStockTable(connection : Connection):
     async with connection.transaction():
         await connection.execute('''
             CREATE TABLE IF NOT EXISTS cotacoes(
-                abertura float(3),
-                fechamento float(3),
-                alta float(3),
-                baixa float(3),
+                preco float(3),
                 volume bigint,
                 data timestamp without time zone,
                 variacao float(3),

@@ -13,6 +13,8 @@ from modules.business import stockQuoteDataBusiness
 from modules.utils import config
 from modules.persistance import companyPersistence
 from modules.business import companyBusiness
+from marshmallow import Schema, fields, ValidationError
+from modules.models.companyStockSchema import CompanyStockSchema
 
 app = Sanic(__name__)
 CORS(app)
@@ -51,7 +53,7 @@ async def getBvspIntraDay(request, timeInterval : int):
     stockDataList = stockQuoteDataBusiness.getOnlyLastDailyData(stockDataList)
     return json(
         {"alpha_vantage_data" : [stock.toJSON() for stock in stockDataList]}, 
-        headers={'X-Served-By': 'sanic'},
+        headers={'AlphaVantageAPI-Served-By': 'sanic'},
         status = 200,
     )
 
@@ -64,12 +66,25 @@ async def getTop10(request):
     companyList = await companyPersistence.getTop10Companies()
     return json(
         {"empresas" : [company.toJSON() for company in companyList]}, 
-        headers={'X-Served-By': 'sanic'},
+        headers={'AlphaVantageAPI-Served-By': 'sanic'},
         status = 200,
     )
 
+# método para buscar a cotação de uma empresa dado o seu código reconhecido pela api do Alpha Vantage
+# @params: companySymbol: o símbolo que identifica a empresa para qual se quer a cotação
+# @output: um JSON contendo a cotação da empresa retornada pela api do Alpha Vantage
 @app.route("/get-company-stock/<companySymbol>", methods=["GET"])
 async def getCompanyStock(request, companySymbol : str):
+    schema = CompanyStockSchema(only = ("companySymbol",))
+    try:
+        schema.load({"companySymbol" : companySymbol})
+    except ValidationError as err:
+        return json(
+            {"error": err.messages},
+            headers={'AlphaVantageAPI-Served-By':'Sanic'},
+            status=400,
+        )
+
     parameters : str = ""
     function : str = "GLOBAL_QUOTE" #parâmetro para cotação de uma empresa pelo alpha vantage
     symbol : str = companySymbol #símbolo da empresa a ser consultada
@@ -82,12 +97,50 @@ async def getCompanyStock(request, companySymbol : str):
 
     response = requests.get('https://www.alphavantage.co/query?' + parameters)
     jsonResponse : dict = response.json() #em python, ao desserializar o json do response o objeto é do tipo dict
-    stock : CompanyStock = companyBusiness.convertDictToCompanyStock(jsonResponse["Global Quote"])
-    return json(
-        {"stock" : stock.toJSON()},
-        headers={'X-Served-By': 'sanic'},
-        status = 200
-    )
+    try : 
+        stock : CompanyStock = companyBusiness.convertDictToCompanyStock(jsonResponse["Global Quote"])
+        return json(
+            {"stock" : stock.toJSON()},
+            headers={'AlphaVantageAPI-Served-By': 'sanic'},
+            status = 200
+        )
+    except Exception as exceptMSg:
+        return json(
+            {"erros": exceptMsg},
+            headers={'AlphaVantageAPI-Served-By':'Sanic'},
+            status=400,
+        )
+
+# método para salvar em banco os dados de cotação de uma empresa
+# @param: companyStock : um objeto que modela uma cotação de uma empresa
+# @output: ao final do método, se não houver nada errado a cotação da empresa com código especificado
+# na cotação recebeida terá seu valor salvo/alterado em banco
+@app.route("/update-company-stock", methods=["PUT", "OPTIONS"])
+async def updateCompanyStock(request):
+    if(request.method == "PUT"):
+        try:
+            stockSchema  = CompanyStockSchema()
+            stock = stockSchema.load(request.json)
+            await companyPersistence.updateCompanyStock(stock)
+            return json(
+                {"message" : "Sucesso"},
+                headers={'AlphaVantageAPI-Served-By': 'sanic'},
+                status = 200
+            )
+        except Exception as exceptMsg:
+            print("Erro ao atualizar cotação da empresa", str(exceptMsg))
+            return json(
+                {"erros": str(exceptMsg)},
+                headers={'AlphaVantageAPI-Served-By':'Sanic'},
+                status=400,
+            )
+    if(request.method != "OPTIONS"):
+        return json(
+            {"erros": "Método não permitido"},
+            headers={'AlphaVantageAPI-Served-By':'Sanic'},
+            status=405,
+        )
+    return json({"message" : "Success"}, status = 200)
 
 def validateTimeIntervalValue(value : int):
     if(value not in supportedTimeIntervals):
