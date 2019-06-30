@@ -1,4 +1,4 @@
-from models.companyStock import CompanyStock
+from modules.models.companyStock import CompanyStock
 
 class Company:
     def __init__(self, name : str = "", symbol : str = "", 
@@ -31,17 +31,31 @@ class Company:
     def getRank():
         return self.__rank
     
-    def setRank(rank : int):
+    def setRank(self, rank : int):
         self.__rank = rank
     
     def getSector():
         return self.__sector
     
-    def setSector(sector : str):
+    def setSector(self, sector : str):
         self.__sector = sector
     
     def getStock():
         return self.__stock
     
-    def setStock(stock : CompanyStock):
+    def setStock(self, stock : CompanyStock):
         self.__stock = stock
+    
+    def toJSON(self):
+        data = {
+            "lastUpdate"  : self.__stock.getFormatedTimeStamp(),
+            "price"  : self.__stock.getPrice(),
+            "name"  : self.__name,
+            "symbol"   : self.__symbol,
+            "region" : self.__region,
+            "rank": self.__rank,
+            "sector": self.__sector,
+            "change": self.__stock.getChange(),
+            "changePerCent": self.__stock.getChangePercent()
+        }
+        return data

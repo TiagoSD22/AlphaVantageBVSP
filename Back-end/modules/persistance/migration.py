@@ -1,11 +1,11 @@
 import asyncio
 import asyncpg
 from asyncpg.connection import Connection
-from modules.utils import config
+from modules.persistance import connectionFactory
 
 async def init():
     try:
-        conn = await asyncpg.connect('postgresql://' + config.getDBUser() + "@localhost/" + config.getDBName(), password=config.getDBPwd())
+        conn = await connectionFactory.getDBDriverConnection()
         await createUserTable(conn)
         await createCompanyTable(conn)
         await createStockTable(conn)
@@ -16,7 +16,7 @@ async def init():
         await conn.close()
         return True
     except Exception as exceptMsg:
-        print(exceptMsg)
+        print(str(exceptMsg))
         return False
 
 async def createUserTable(connection : Connection):
@@ -33,9 +33,9 @@ async def createCompanyTable(connection : Connection):
     async with connection.transaction():
         await connection.execute('''
             CREATE TABLE IF NOT EXISTS empresas(
-                id bigserial PRIMARY KEY NOT NULL,
+                id bigserial NOT NULL,
                 nome character varying(50) NOT NULL,
-                simbolo character varying(20) NOT NULL UNIQUE,
+                simbolo_empresa character varying(20) PRIMARY KEY NOT NULL UNIQUE,
                 regiao character varying(50),
                 setor character varying(20),
                 rank int
@@ -52,8 +52,10 @@ async def createStockTable(connection : Connection):
                 baixa float(3),
                 volume bigint,
                 data timestamp without time zone,
+                variacao float(3),
+                variacao_por_cento float(5),
                 simbolo_empresa character varying(20) NOT NULL,
-                CONSTRAINT cotacao_fk FOREIGN KEY(simbolo_empresa) REFERENCES empresas(simbolo)
+                CONSTRAINT cotacao_fk FOREIGN KEY(simbolo_empresa) REFERENCES empresas(simbolo_empresa)
             )'''
         )
 

@@ -51,7 +51,7 @@ class StockQuoteData:
         self.__volume = volume
     
     def getFormatedTimeStamp(self):
-        return self.__timeStamp.strftime("%m-%d-%y %H:%M:%S")
+        return self.__timeStamp.strftime("%m-%d-%y %H:%M:%S") if self.__timeStamp is not None else ""
     
     def toJSON(self):
         data = {

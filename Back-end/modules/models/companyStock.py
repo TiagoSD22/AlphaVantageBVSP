@@ -34,3 +34,13 @@ class CompanyStock(StockQuoteData):
     
     def setChangePercent(self, changePercent : float = 0):
         self.__changePercent = changePercent
+
+    def toJSON(self):
+        data = {
+            "timeStamp"  : self.getFormatedTimeStamp(),
+            "price"  : self.__price,
+            "change"  : self.__change,
+            "changePercent"   : self.__changePercent,
+            "volume": super().getVolume()
+        }
+        return data
