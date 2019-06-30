@@ -1,6 +1,5 @@
 import { StockChart } from 'angular-highcharts';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { CotacaoBovespaService } from './cotacao-bovespa.service';
 import { StockQuoteData } from '../../models/stock-quote-data';
 import { ToastrService } from 'ngx-toastr';
@@ -24,8 +23,7 @@ export class CotacaoBovespaComponent implements OnInit, AfterViewInit {
   loading : boolean = true;
   timeInterval : number = 1;
 
-  constructor(private router : Router, 
-              private cotacaoService : CotacaoBovespaService,
+  constructor(private cotacaoService : CotacaoBovespaService,
               private toastr : ToastrService) { }
   
   ngOnInit() {
@@ -74,7 +72,7 @@ export class CotacaoBovespaComponent implements OnInit, AfterViewInit {
       this.loading = false;
     }, error => {
       this.loading = false;
-      this.toastr.error("Falha ao se comunicar com o servidor!", error, { progressBar: true, timeOut: 2000 });
+      this.toastr.error("Falha ao se comunicar com o servidor!", "Ops!", { progressBar: true, timeOut: 2000 });
     });
   }
 

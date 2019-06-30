@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ConfigService } from './../../shared/config.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { StockQuoteData } from '../../models/stock-quote-data';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { StockQuoteData } from '../../models/stock-quote-data';
 })
 export class CotacaoBovespaService {
 
-  private bvspIntradayUrl : string;
+  private bvspIntradayUrl : string = "";
 
   constructor(private config : ConfigService, private http : HttpClient) { 
     this.bvspIntradayUrl = this.config.app.urlBase.concat("/bvsp-intraday");
