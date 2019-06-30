@@ -67,13 +67,14 @@ export class CotacaoBovespaComponent implements OnInit, AfterViewInit {
 
   getBvspIntraday() {
     this.cotacaoService.calculateIntraday(this.timeInterval).subscribe(res => {
-      this.toastr.success("Dados do Bovespa recebidos!", "OK");
-      this.stockData = res.reverse();
+      this.toastr.success("Dados do Bovespa recebidos!", "OK", { progressBar: true, timeOut: 2000 });
+      this.stockData = res["alpha_vantage_data"].reverse();
       this.getDailyValues();
       this.updateStockChart();
       this.loading = false;
     }, error => {
-      this.toastr.error("Falha ao se comunicar com o servidor!", error);
+      this.loading = false;
+      this.toastr.error("Falha ao se comunicar com o servidor!", error, { progressBar: true, timeOut: 2000 });
     });
   }
 

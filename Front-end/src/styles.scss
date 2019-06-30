@@ -10,6 +10,18 @@
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 //== App
 @import "./app/shared/styles/app";
+//== Toastr
+@import '~ngx-toastr/toastr.css';
+// regular style toast 
+@import '~ngx-toastr/toastr';
+// if you'd like to use it without importing all of bootstrap it requires 
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+#toast-container > div {
+  opacity:1;
+}
 
 .mat-tab-group-dynamic-height .mat-tab-body-content{
   overflow:auto !important;

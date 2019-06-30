@@ -14,4 +14,8 @@ export class EmpresasComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngAfterViewInit(): void {
+    this.loading = false;
+  }
+
 }
