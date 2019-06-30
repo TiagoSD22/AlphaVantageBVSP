@@ -1,10 +1,14 @@
 from models.companyStock import CompanyStock
 
 class Company:
-    def __init__(self, name : str = "", symbol : str = "", region : str = "", stock : CompanyStock = CompanyStock()):
+    def __init__(self, name : str = "", symbol : str = "", 
+                 region : str = "", rank : int = 0, sector : str = "", stock : CompanyStock = CompanyStock()):
         self.__name = name
         self.__symbol = symbol
         self.__region = region
+        self.__rank = rank
+        self.__sector = sector
+        self.__stock = stock
     
     def getName(self):
         return self.__name
@@ -23,3 +27,21 @@ class Company:
     
     def setRegion(self, region : str):
         self.__region = region
+    
+    def getRank():
+        return self.__rank
+    
+    def setRank(rank : int):
+        self.__rank = rank
+    
+    def getSector():
+        return self.__sector
+    
+    def setSector(sector : str):
+        self.__sector = sector
+    
+    def getStock():
+        return self.__stock
+    
+    def setStock(stock : CompanyStock):
+        self.__stock = stock
