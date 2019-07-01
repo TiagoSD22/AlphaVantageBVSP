@@ -58,7 +58,7 @@ export class EmpresasComponent implements OnInit, AfterViewInit {
       this.toastr.success("Cotação obtida", "Ok", { progressBar: true, timeOut: 2000 });
     }, error => {
       this.toastr.clear();
-      this.toastr.error("Falha ao se comunicar com o servidor!", "Ops!", { progressBar: true, timeOut: 2000 });
+      this.toastr.error("Falha ao se comunicar com o servidor!", "Ops", { progressBar: true, timeOut: 2000 });
       this.loadIndicator = false;
     });
   }
@@ -76,7 +76,6 @@ export class EmpresasComponent implements OnInit, AfterViewInit {
 
   onSort(event) {
     let sortEvent = event.sorts[0];
-    console.log(sortEvent);
     this.sortData(sortEvent);
   }
 
