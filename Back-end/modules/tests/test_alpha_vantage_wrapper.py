@@ -54,10 +54,10 @@ def testGetCompanyStock():
     request, response = app.test_client.get("/get-company-stock/BBDC4.SAO")
     assert response.status_code == 200
 
-# teste para obter uma cotacao de uma empresa invalida que deve retornar bad_request(400)
+# teste para obter uma cotacao de uma empresa invalida que deve retornar not_acceptable(406)
 def testGetInvalidCompanyStock():
     request, response = app.test_client.get("/get-company-stock/XYZ")
-    assert response.status_code == 400
+    assert response.status_code == 406
 
 # teste para atualizar a cotacao de uma empresa invalida, pois o simbolo nao e reconhecido 
 # e que deve retornar bad_request(400)

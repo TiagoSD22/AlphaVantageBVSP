@@ -71,12 +71,19 @@ async def getBvspIntraDay(request, timeInterval : int):
 # de acordo com os valores salvos no banco 
 @app.route("/get-top-10", methods=["GET"])
 async def getTop10(request):
-    companyList = await companyPersistence.getTop10Companies()
-    return json(
-        {"empresas" : [company.toJSON() for company in companyList]}, 
-        headers={'AlphaVantageAPI-Served-By': 'sanic'},
-        status = 200,
-    )
+    try:
+        companyList = await companyPersistence.getTop10Companies()
+        return json(
+            {"empresas" : [company.toJSON() for company in companyList]}, 
+            headers={'AlphaVantageAPI-Served-By': 'sanic'},
+            status = 200,
+        )
+    except Exception as exceptMsg:
+        return json(
+                {"erro" : str(exceptMsg)}, 
+                headers={'AlphaVantageAPI-Served-By': 'sanic'},
+                status = 500,
+        )
 
 # método para buscar a cotação de uma empresa dado o seu código reconhecido pela api do Alpha Vantage
 # @params: companySymbol: o símbolo que identifica a empresa para qual se quer a cotação
@@ -90,7 +97,7 @@ async def getCompanyStock(request, companySymbol : str):
         return json(
             {"error": err.messages},
             headers={'AlphaVantageAPI-Served-By':'Sanic'},
-            status=400,
+            status=406,
         )
 
     parameters : str = ""
