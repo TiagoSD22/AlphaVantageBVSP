@@ -12,9 +12,9 @@ from modules.models.companyStock import CompanyStock
 from modules.business import stockQuoteDataBusiness
 from modules.utils import config
 from modules.persistance import companyPersistence
-from modules.business import companyBusiness
-from marshmallow import Schema, fields, ValidationError
+from marshmallow import Schema, fields, ValidationError, EXCLUDE
 from modules.models.companyStockSchema import CompanyStockSchema
+from modules.models.companyStockAlphaSchema import CompanyStockAlphaSchema
 
 app = Sanic(__name__)
 CORS(app)
@@ -75,9 +75,9 @@ async def getTop10(request):
 # @output: um JSON contendo a cotação da empresa retornada pela api do Alpha Vantage
 @app.route("/get-company-stock/<companySymbol>", methods=["GET"])
 async def getCompanyStock(request, companySymbol : str):
-    schema = CompanyStockSchema(only = ("companySymbol",))
+    stockSchema = CompanyStockSchema(only = ("companySymbol",))
     try:
-        schema.load({"companySymbol" : companySymbol})
+        stockSchema.load({"companySymbol" : companySymbol})
     except ValidationError as err:
         return json(
             {"error": err.messages},
@@ -97,18 +97,20 @@ async def getCompanyStock(request, companySymbol : str):
 
     response = requests.get('https://www.alphavantage.co/query?' + parameters)
     jsonResponse : dict = response.json() #em python, ao desserializar o json do response o objeto é do tipo dict
-    try : 
-        stock : CompanyStock = companyBusiness.convertDictToCompanyStock(jsonResponse["Global Quote"])
+    try :
+        schema = CompanyStockAlphaSchema()
+        res = jsonResponse["Global Quote"]
+        stock = schema.load(res, unknown=EXCLUDE)
         return json(
             {"stock" : stock.toJSON()},
             headers={'AlphaVantageAPI-Served-By': 'sanic'},
             status = 200
         )
-    except Exception as exceptMSg:
+    except Exception as exceptMsg:
         return json(
-            {"erros": exceptMsg},
+            {"erros": str(exceptMsg)},
             headers={'AlphaVantageAPI-Served-By':'Sanic'},
-            status=400,
+            status=400
         )
 
 # método para salvar em banco os dados de cotação de uma empresa

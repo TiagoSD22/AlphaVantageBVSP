@@ -11,7 +11,7 @@ class CompanyStockSchema(Schema):
     companySymbol = fields.Str(required=True)
 
     @post_load
-    def dumpStock(self, data, **kwargs):
+    def loadStock(self, data, **kwargs):
         return CompanyStock(**data)
 
     @validates('companySymbol')

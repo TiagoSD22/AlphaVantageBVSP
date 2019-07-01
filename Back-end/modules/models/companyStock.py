@@ -6,6 +6,7 @@ class CompanyStock:
                         price : float = 0,
                         change : float = 0,
                         changePercent : float = 0,
+                        changePercentStr : str = "",
                         companySymbol : str = ""):
 
         self.__lastUpdate = lastUpdate
@@ -14,6 +15,8 @@ class CompanyStock:
         self.__change = change
         self.__changePercent = changePercent
         self.__companySymbol = companySymbol
+        if(changePercentStr != ""):
+            self.__changePercent = changePercentStr.split("%")[0]
     
     def getLastUpdate(self):
         return self.__lastUpdate

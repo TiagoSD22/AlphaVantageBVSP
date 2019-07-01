@@ -6,7 +6,6 @@ from modules.persistance import connectionFactory
 async def init():
     try:
         conn = await connectionFactory.getDBDriverConnection()
-        await createUserTable(conn)
         await createCompanyTable(conn)
         await createStockTable(conn)
         companiesQuantity = await getCompaniesQuantity(conn)
@@ -18,16 +17,6 @@ async def init():
     except Exception as exceptMsg:
         print(str(exceptMsg))
         return False
-
-async def createUserTable(connection : Connection):
-    async with connection.transaction():
-        await connection.execute('''
-            CREATE TABLE IF NOT EXISTS usuarios(
-                id bigserial PRIMARY KEY NOT NULL,
-                nome character varying(50) NOT NULL,
-                login character varying(20) NOT NULL UNIQUE
-            )'''
-        )
 
 async def createCompanyTable(connection : Connection):
     async with connection.transaction():
