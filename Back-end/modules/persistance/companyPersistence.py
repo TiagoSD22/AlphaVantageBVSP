@@ -15,7 +15,7 @@ async def getTop10Companies():
             select e.nome as nome, e.simbolo_empresa as simbolo, 
             e.regiao as regiao, e.setor as setor, e.rank as rank, 
             c.preco as preco, c.volume as volume, c.data as dt_u_a, c.variacao as var, c.variacao_por_cento as vp 
-            from empresas e left join cotacoes c on e.simbolo_empresa = c.simbolo_empresa;
+            from empresas e left join cotacoes c on e.simbolo_empresa = c.simbolo_empresa ORDER BY e.rank;
         '''))
         companyList : list = []
         for item in resultSet:

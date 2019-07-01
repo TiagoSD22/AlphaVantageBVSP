@@ -29,7 +29,8 @@ async def getBvspIntraDay(request, timeInterval : int):
     except Exception as exceptionMessage:
         return json(
             {"message" : str(exceptionMessage)},
-            status =  406,
+            headers={'AlphaVantageAPI-Served-By': 'sanic'},
+            status =  406
         )
 
     parameters : str = ""
@@ -55,13 +56,13 @@ async def getBvspIntraDay(request, timeInterval : int):
         return json(
             {"alpha_vantage_data" : [stock.toJSON() for stock in stockDataList]}, 
             headers={'AlphaVantageAPI-Served-By': 'sanic'},
-            status = 200,
+            status = 200
         )
     except:
         return json(
             {"message" : "Muitas requisições em poco tempo, considere usar uma chave Premium."}, 
             headers={'AlphaVantageAPI-Served-By': 'sanic'},
-            status = 400,
+            status = 400
         )
 
 # método para retornar a lista das 10 maiores empresas brasileiras salvas em banco
@@ -155,5 +156,8 @@ def validateTimeIntervalValue(value : int):
     if(value not in supportedTimeIntervals):
         raise Exception("O valor de intervalo (" + str(value) + ") é inválido. Apenas os seguintes valores são suportados: " + str(list(supportedTimeIntervals.keys())) + ".")
 
-def start(port = 5000):
-    app.run(debug = True,host="0.0.0.0", port = port)
+
+def createApp():
+    return app
+
+
