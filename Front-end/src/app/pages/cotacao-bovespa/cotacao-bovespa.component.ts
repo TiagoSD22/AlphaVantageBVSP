@@ -72,7 +72,8 @@ export class CotacaoBovespaComponent implements OnInit, AfterViewInit {
       this.loading = false;
     }, error => {
       this.loading = false;
-      this.toastr.error("Falha ao se comunicar com o servidor!", "Ops!", { progressBar: true, timeOut: 2000 });
+      console.log(JSON.stringify(error))
+      this.toastr.error(error["error"]["message"], "Ops!", { progressBar: true, timeOut: 2000 });
     });
   }
 
