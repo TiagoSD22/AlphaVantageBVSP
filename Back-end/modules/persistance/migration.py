@@ -72,7 +72,3 @@ async def insertTop10Companies(connection : Connection):
                 (9, "Itaú Unibanco", "ITUB4.SAO", "São Paulo, São Paulo", "Bancário", 2),
                 (10, "Petrobras", "PETR4.SAO", "Rio de Janeiro, Rio de Janeiro", "Petróleo e gás", 1)
         ])
-
-    
-
-
