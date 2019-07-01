@@ -41,7 +41,7 @@ async def createStockTable(connection : Connection):
                 variacao float(3),
                 variacao_por_cento float(5),
                 simbolo_empresa character varying(20) NOT NULL,
-                CONSTRAINT cotacao_fk FOREIGN KEY(simbolo_empresa) REFERENCES empresas(simbolo_empresa)
+                CONSTRAINT cotacao_fk FOREIGN KEY(simbolo_empresa) REFERENCES empresas(simbolo_empresa) ON DELETE CASCADE
             )'''
         )
 
