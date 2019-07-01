@@ -48,14 +48,21 @@ async def getBvspIntraDay(request, timeInterval : int):
 
     response = requests.get('https://www.alphavantage.co/query?' + parameters)
     jsonResponse : dict = response.json() #em python, ao desserializar o json do response o objeto é do tipo dict
-    metadata, timeStampsData = islice(jsonResponse.values(), 2)#os dados da série estão a partir do segunda valor que corresponde à chave Time Stamps 
-    stockDataList : list = stockQuoteDataBusiness.convertDictToStockQuoteDataList(timeStampsData)
-    stockDataList = stockQuoteDataBusiness.getOnlyLastDailyData(stockDataList)
-    return json(
-        {"alpha_vantage_data" : [stock.toJSON() for stock in stockDataList]}, 
-        headers={'AlphaVantageAPI-Served-By': 'sanic'},
-        status = 200,
-    )
+    try:
+        metadata, timeStampsData = islice(jsonResponse.values(), 2)#os dados da série estão a partir do segunda valor que corresponde à chave Time Stamps 
+        stockDataList : list = stockQuoteDataBusiness.convertDictToStockQuoteDataList(timeStampsData)
+        stockDataList = stockQuoteDataBusiness.getOnlyLastDailyData(stockDataList)
+        return json(
+            {"alpha_vantage_data" : [stock.toJSON() for stock in stockDataList]}, 
+            headers={'AlphaVantageAPI-Served-By': 'sanic'},
+            status = 200,
+        )
+    except:
+        return json(
+            {"message" : "Muitas requisições em poco tempo, considere usar uma chave Premium."}, 
+            headers={'AlphaVantageAPI-Served-By': 'sanic'},
+            status = 400,
+        )
 
 # método para retornar a lista das 10 maiores empresas brasileiras salvas em banco
 # @param: nenhum
