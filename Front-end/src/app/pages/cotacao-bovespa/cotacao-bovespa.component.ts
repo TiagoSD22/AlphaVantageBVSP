@@ -72,7 +72,6 @@ export class CotacaoBovespaComponent implements OnInit, AfterViewInit {
       this.loading = false;
     }, error => {
       this.loading = false;
-      console.log(JSON.stringify(error))
       this.toastr.error(error["error"]["message"], "Ops!", { progressBar: true, timeOut: 2000 });
     });
   }

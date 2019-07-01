@@ -22,12 +22,12 @@
     <ngx-datatable-column name="Símbolo" prop="symbol" [sortable]="tableSortable"></ngx-datatable-column>
     <ngx-datatable-column name="Região" prop="region" [sortable]="tableSortable"></ngx-datatable-column>
     <ngx-datatable-column name="Setor" prop="sector" [sortable]="tableSortable"></ngx-datatable-column>
-    <ngx-datatable-column name="Preço" [sortable]="tableSortable">
+    <ngx-datatable-column name="Preço" prop="price" [sortable]="tableSortable">
       <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row" prop="price">
         {{companies[rowIndex].stock.price | currency:'BRL':true:'1.2-2'}}
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Variação(%)" [sortable]="tableSortable">
+    <ngx-datatable-column name="Variação(%)" prop="changePercent" [sortable]="tableSortable">
       <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row" prop="changePercent">
         <h5 *ngIf="companies[rowIndex].stock.changePercent != null && companies[rowIndex].stock.changePercent <= 0" style="font-size: 16px;color: red;">
           {{companies[rowIndex].stock.changePercent | number : '1.2-4'}}%
@@ -37,7 +37,7 @@
         </h5>
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Atualizado em" [sortable]="tableSortable">
+    <ngx-datatable-column name="Atualizado em" prop="lastUpdate" [sortable]="tableSortable">
       <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row" prop="lastUpdate">
         {{companies[rowIndex].stock.lastUpdate | date : 'dd/MM/yy'}}
       </ng-template>

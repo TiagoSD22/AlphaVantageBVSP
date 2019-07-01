@@ -29,7 +29,6 @@ export class EmpresasComponent implements OnInit, AfterViewInit {
     this.loadIndicator = true
     this.empresaService.getTopCompany().subscribe(res => {
       this.companies = res["empresas"];
-      this.sortData({dir: "asc", prop: "rank"})
       this.loading = false;
       this.loadIndicator = false;
       this.toastr.clear();
