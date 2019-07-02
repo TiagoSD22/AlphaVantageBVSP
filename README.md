@@ -133,5 +133,5 @@ Dentro da pasta /tests localizada em /Back-end/modules existe um arquivo feito c
   
 ###### Consideraçes finais
 
-+ Todos os dados acerca das cotações de empresas, bem como o valor do Bovespa são fornecidos em tempo real pelas API's do [Alpha Vantage](https://www.alphavantage.co/)
-+ A lista das 10 maiores empresas brasileiras de 2019 foi retirada da **Forbes Global 2000** disponveis no endereço <https://forbes.uol.com.br/listas/2019/05/global-2000-20-maiores-empresas-brasileiras-de-capital-aberto-de-2019/#foto11> .
++ Todos os dados acerca das cotações de empresas, bem como o valor do Ibovespa são fornecidos em tempo real pelas API's do [Alpha Vantage](https://www.alphavantage.co/)
++ A lista das 10 maiores empresas brasileiras de 2019 foi retirada da **Forbes Global 2000** disponível no endereço: <https://forbes.uol.com.br/listas/2019/05/global-2000-20-maiores-empresas-brasileiras-de-capital-aberto-de-2019/#foto11> .
