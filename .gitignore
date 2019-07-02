@@ -460,8 +460,6 @@ local.properties
 # PDT-specific (PHP Development Tools)
 .buildpath
 
-package-lock.json
-
 # sbteclipse plugin
 .target
 
