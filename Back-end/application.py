@@ -7,6 +7,6 @@ if __name__ == "__main__":
     if(result):
         print("Iniciando API")
         app = api.createApp()
-        app.run(debug=False, port=5000)
+        app.run(host='0.0.0.0', debug=False, port=5000)
     else:
         print("Falha ao realizar migração do bando de dados, não foi possível iniciar a aplicação.")
