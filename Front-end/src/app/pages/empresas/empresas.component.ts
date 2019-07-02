@@ -57,7 +57,7 @@ export class EmpresasComponent implements OnInit, AfterViewInit {
       this.toastr.success("Cotação obtida", "Ok", { progressBar: true, timeOut: 2000 });
     }, error => {
       this.toastr.clear();
-      this.toastr.error("Falha ao se comunicar com o servidor!", "Ops", { progressBar: true, timeOut: 2000 });
+      this.toastr.error(error["erros"]["message"], "Ops", { progressBar: true, timeOut: 2000 });
       this.loadIndicator = false;
     });
   }

@@ -4,6 +4,7 @@ from asyncpg.connection import Connection
 from modules.persistance import connectionFactory
 
 async def init():
+    print("Iniciando migration do banco de dados.")
     try:
         conn = await connectionFactory.getDBDriverConnection()
         await createCompanyTable(conn)
@@ -13,6 +14,7 @@ async def init():
             print("Tabela de empresas com menos de 10 registros (",companiesQuantity,"), inserindo dados das maiores empresas brasileiras.")
             await insertTop10Companies(conn)
         await conn.close()
+        print("Migration realizada com sucesso!")
         return True
     except Exception as exceptMsg:
         print(str(exceptMsg))

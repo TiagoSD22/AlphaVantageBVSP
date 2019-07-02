@@ -159,11 +159,12 @@ async def updateCompanyStock(request):
         )
     return json({"message" : "Success"}, status = 200)
 
+# Método para checar se um determinado valor de intervalo de tempo é válido
 def validateTimeIntervalValue(value : int):
     if(value not in supportedTimeIntervals):
         raise Exception("O valor de intervalo (" + str(value) + ") é inválido. Apenas os seguintes valores são suportados: " + str(list(supportedTimeIntervals.keys())) + ".")
 
-
+# Método para retornar o objeto referenciado da aplicação para que esta possa ser executada em outro módulo
 def createApp():
     return app
 
