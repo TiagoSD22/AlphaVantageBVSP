@@ -7,8 +7,8 @@
 # Imagem para Docker do cliente Angular
 FROM node:10-alpine as builder
 
-# Copiando o arquivo com as dependências do projeto localizadas nos arquivos package.json e package-lock.json
-COPY package.json package-lock.json ./
+# Copiando o arquivo com as dependências do projeto localizadas no arquivo package.json
+COPY package.json ./
 
 ## Armazenar a pasta node modules em outro lugar evitará chamadas desnecessárias do npm install a cada build da imagem
 
