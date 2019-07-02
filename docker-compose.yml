@@ -1,3 +1,7 @@
+# Descrição:
+# Docker-compose para controle e gerenciamento dos containers da aplicação
+# @Maintainer: Tiago Siqueira Dionizio <tiagosdionizio@gmail.com>
+
 version: '2'
 
 # Definição dos serviços para aplicação
@@ -21,7 +25,7 @@ services:
       ports:
         # redirecionando a porta do cliente postgres do container (5432)
         # para a porta 5432 da máquina executando a aplicação
-        - '5432:5432' 
+        - "5432:5432" 
       volumes:
         - ./pgdata:/var/lib/postgresql/data # configurando diretório local para armazenar dados do banco da aplicação
   

@@ -1,14 +1,17 @@
-FROM python:3.7.3
-# Informação dessa docker image
-LABEL version="0.1" description="API criada para o Desafio da Empresa Ponto Tel" maintainer="Tiago Siqueira Dionizio" email="tiagosdionizio@gmail.com"
+# Descrição:
+# Dockerfile para build da imagem do servidor em Python da API
+# @Maintainer: Tiago Siqueira Dionizio <tiagosdionizio@gmail.com>
 
-# Endereço da API
+# Imagem base do container
+FROM python:3.7.3
+
+# Endereço do projeto
 ENV APP=/usr/src/app
 
-# Criando para a aplicação
+# Pasta padrão para a aplicação
 RUN mkdir -p $APP
 
-# Copiando todos os arquivos para dentro do container
+# Copiando todos os arquivos para dentro da pasta padrão
 COPY . $APP
 
 # Diretório base da aplicação
