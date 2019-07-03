@@ -123,7 +123,7 @@ Dentro da pasta /tests localizada em /Back-end/modules existe um arquivo feito c
 
 #### Screenshots da aplicação
 
-![Tela de exibição do Ibovespa](https://i.imgur.com/LZZompB.png)
+![Tela de exibição do Ibovespa](https://i.imgur.com/Srnvysd.png)
   *Tela de exibição do Ibovespa do dia*
 
 ---  
