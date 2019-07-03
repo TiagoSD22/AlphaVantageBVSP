@@ -13,4 +13,4 @@ if __name__ == "__main__":
         port = config.getApplicationPort()
         app.run(host=host, debug=debug, port=port)
     else:
-        print("Falha ao realizar migração do bando de dados, não foi possível iniciar a aplicação.")
+        print("Falha ao realizar migração do banco de dados, não foi possível iniciar a aplicação.")
