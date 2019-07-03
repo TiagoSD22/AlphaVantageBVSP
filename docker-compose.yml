@@ -15,6 +15,17 @@ services:
     volumes:
       # redirecionando diretório do app do container para permitir live reload da página ao se alterar o código fonte
       - ./Front-end:/app 
+  
+  python.server: # container do servidor em python
+    build: Back-end/. # local do Dockerfile para imagem do servidor python
+    ports:
+      # redirecionando a porta da API sendo executada no container(5000)
+      # para a porta 5000 da máquina executando a aplicação 
+      - "5000:5000" 
+    links:
+      # adicionando o container do banco de dados como dependência do container servidor
+      # para que a aplicação possa fazer a persistência e acesso dos dados
+      - database
 
   database: #container de banco de dados da aplicação
       image: postgres:10 #utilizando imagem do dockerHub para postgreSQL10
@@ -28,14 +39,3 @@ services:
         - "5432:5432" 
       volumes:
         - ./pgdata:/var/lib/postgresql/data # configurando diretório local para armazenar dados do banco da aplicação
-  
-  python.server: # container do servidor em python
-    build: Back-end/. # local do Dockerfile para imagem do servidor python
-    ports:
-      # redirecionando a porta da API sendo executada no container(5000)
-      # para a porta 5000 da máquina executando a aplicação 
-      - "5000:5000" 
-    links:
-      # adicionando o container do banco de dados como dependência do container servidor
-      # para que a aplicação possa fazer a persistência e acesso dos dados
-      - database 
