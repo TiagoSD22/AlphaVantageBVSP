@@ -1,24 +1,22 @@
-import { CompanyStock } from './company-stock';
-import { stock } from 'highcharts/modules/stock.src';
-import { StockChart } from 'angular-highcharts';
 import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { EmpresaService } from './empresa.service';
-import { Empresa } from "./empresa";
+import {CompanyService} from "../../services/company.service"
+import { CompanyStock } from '../../models/company-stock';
+import { Company } from '../../models/company';
 
 @Component({
   selector: 'app-empresas',
-  templateUrl: './empresas.component.html',
-  styleUrls: ['./empresas.component.scss']
+  templateUrl: './companies.component.html',
+  styleUrls: ['./companies.component.scss']
 })
-export class EmpresasComponent implements OnInit, AfterViewInit {
+export class CompaniesComponent implements OnInit, AfterViewInit {
 
   loading : boolean = true;
   loadIndicator : boolean = false;
-  companies : Array<Empresa> = [];
+  companies : Array<Company> = [];
   tableSortable : boolean = true;
 
-  constructor(private empresaService : EmpresaService,
+  constructor(private empresaService : CompanyService,
               private toastr : ToastrService,
               private changeDetectorRefs: ChangeDetectorRef) { }
 

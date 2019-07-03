@@ -1,15 +1,16 @@
 import { StockChart } from 'angular-highcharts';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { CotacaoBovespaService } from './cotacao-bovespa.service';
+import { Component, OnInit, AfterViewInit,  ViewEncapsulation } from '@angular/core';
+import { BovespaStockService } from '../../services/bovespa-stock.service';
 import { StockQuoteData } from '../../models/stock-quote-data';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-cotacao-bovespa',
-  templateUrl: './cotacao-bovespa.component.html',
-  styleUrls: ['./cotacao-bovespa.component.scss'],
+  selector: 'app-bovespa-stock',
+  templateUrl: './bovespa-stock.component.html',
+  styleUrls: ['./bovespa-stock.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
-export class CotacaoBovespaComponent implements OnInit, AfterViewInit {
+export class BovespaStockComponent implements OnInit, AfterViewInit {
 
   stock: StockChart;
   stockData : Array<StockQuoteData> = [];
@@ -21,9 +22,11 @@ export class CotacaoBovespaComponent implements OnInit, AfterViewInit {
   variationPercent : number = 0;
   lastUpdateDate : string = "";
   loading : boolean = true;
+  graphLoaded : boolean = false;
   timeInterval : number = 1;
+  useDefaultInterval : boolean = true;
 
-  constructor(private cotacaoService : CotacaoBovespaService,
+  constructor(private cotacaoService : BovespaStockService,
               private toastr : ToastrService) { }
   
   ngOnInit() {
@@ -64,14 +67,17 @@ export class CotacaoBovespaComponent implements OnInit, AfterViewInit {
   }
 
   getBvspIntraday() {
+    this.graphLoaded = false;
     this.cotacaoService.calculateIntraday(this.timeInterval).subscribe(res => {
       this.toastr.success("Dados do Bovespa recebidos!", "OK", { progressBar: true, timeOut: 2000 });
       this.stockData = res["alpha_vantage_data"].reverse();
       this.getDailyValues();
       this.updateStockChart();
       this.loading = false;
+      this.graphLoaded = true;
     }, error => {
       this.loading = false;
+      this.graphLoaded = true;
       this.toastr.error(error["error"]["message"], "Ops!", { progressBar: true, timeOut: 2000 });
     });
   }
@@ -87,6 +93,7 @@ export class CotacaoBovespaComponent implements OnInit, AfterViewInit {
   }
 
   updateStockChart(){
+    this.stock.options.series[0].data = [];
     let data = this.stockData.map(stock => {
       return [Date.parse(stock.timeStamp), +stock.close];
     });
@@ -96,6 +103,10 @@ export class CotacaoBovespaComponent implements OnInit, AfterViewInit {
     })
 
     this.stock.options.plotOptions.line.color = this.variation > 0? "green" : "red";
+  }
+
+  selectTimeInterval(){
+    this.useDefaultInterval = !this.useDefaultInterval;
   }
 
 }

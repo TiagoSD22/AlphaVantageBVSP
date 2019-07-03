@@ -1,0 +1,87 @@
+<div *ngIf="loading" class="load-wrapper">
+    <div class="lds-circle"><div></div></div>
+</div>
+
+<div *ngIf="!loading">
+    <h3 class="title">
+        BOLSA DE VALORES
+    </h3>
+    <div>
+        <div class="row">
+            <div class="col value-info-div">
+                <h5 class="value-info">
+                    <h5 class="value-label">Pontos</h5>
+                    {{close | number : '1.2-2'}}
+                </h5>
+            </div>
+            <div class="col value-info-div">
+                <h5 class="value-info">
+                    <h5 class="value-label">Abertura</h5>
+                    {{open | number : '1.2-2'}}
+                </h5>
+            </div>
+            <div class="col value-info-div">
+                <h5 class="value-info">
+                    <h5 class="value-label">Alta</h5>
+                    {{high | number : '1.2-2'}}
+                </h5>
+            </div>
+            <div class="col value-info-div">
+                <h5 class="value-info">
+                    <h5 class="value-label">Baixa</h5>
+                    {{low | number : '1.2-2'}}
+                </h5>
+            </div>
+            <div class="col value-info-div">
+                <h5 class="value-info" [ngStyle]="{'color': variation >= 0 ? '#85CB33' : '#F56476'}">
+                    <h5 class="value-label">
+                        Variação
+                    </h5>
+                    {{variation | number : '1.2-2'}}({{variationPercent | number : '1.2-3'}}%)
+                    <i style="vertical-align: middle;" *ngIf="variation < 0" class="material-icons">
+                        trending_down
+                    </i>
+                    <i style="vertical-align: middle;" *ngIf="variation > 0" class="material-icons">
+                        trending_up
+                    </i>
+                </h5>
+            </div>
+        </div>
+        <div style="margin-left: 20px;">
+            <h5 class="value-info" style="font-size: 12px;color: #BCD39C;">
+                Última atualização: {{lastUpdateDate | date : 'dd/MM/yyyy, HH:mm:SS'}}
+            </h5>
+            <button *ngIf="useDefaultInterval" style="margin-left: 40px;margin-bottom: 10px;" mat-raised-button class="time-bt" color="primary" (click) = "selectTimeInterval()">
+                Alterar intervalo de tempo
+                <i class="material-icons" style="vertical-align: middle;margin-bottom: 2px;">
+                    access_time
+                </i>
+            </button>
+            <div class="select-div" style="margin-right: 40px;vertical-align: middle;">
+                <mat-form-field *ngIf="!useDefaultInterval" class="form-field">
+                    <mat-label>Selecione o intervalo de tempo</mat-label>
+                    <mat-select class="time-select" [(value)]="timeInterval">
+                        <mat-option value="1">1 minuto</mat-option>
+                        <mat-option value="5">5 minutos</mat-option>
+                        <mat-option value="15">15 minutos</mat-option>
+                        <mat-option value="30">30 minutos</mat-option>
+                        <mat-option value="60">60 minutos</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <button *ngIf="!useDefaultInterval" mat-raised-button class="time-bt" color="primary" (click)="getBvspIntraday()">
+                Atualizar consulta
+                <i class="material-icons" style="vertical-align: middle;margin-bottom: 2px;">
+                    update
+                </i>
+            </button>
+        </div>
+        <div *ngIf="graphLoaded" [chart]="stock" style="margin-bottom: 10px;"></div>
+
+        <div *ngIf="!graphLoaded" class="load-wrapper">
+            <div class="lds-circle">
+                <div></div>
+            </div>
+        </div>
+    </div>
+</div>

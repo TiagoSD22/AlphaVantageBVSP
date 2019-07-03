@@ -1,5 +1,5 @@
 import { CompanyStock } from './company-stock';
-export class Empresa {
+export class Company {
     name : string;
     symbol : string;
     rank : number;

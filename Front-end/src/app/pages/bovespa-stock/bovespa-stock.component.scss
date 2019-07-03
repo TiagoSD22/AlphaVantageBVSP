@@ -2,7 +2,7 @@
     text-align: center;
     //background: #04724D;
     background-image: linear-gradient(141deg,#009e6c 0,#00d1b2 71%,#00e7eb 100%);
-    color: #B1F8F2;
+    color: #FFFFFF;
     padding-top: 10px;
     padding-bottom: 10px;
     margin-top: 0;
@@ -19,6 +19,11 @@
     color: #B1F8F2;
 }
 
+.value-label{
+  color: #FFFFFF;
+  margin: 0 0 0 0;
+}
+
 .value-info-div{
     display: flex;
     text-align: center;
@@ -29,6 +34,44 @@
     position: absolute;
     left: 50%;
     top: 50%;
+}
+
+.time-bt{
+  background-image: linear-gradient(141deg, #009e6c 0, #00d1b2 71%, #00e7eb 100%);
+  margin-bottom: 10px;
+  margin-left: 40px;
+}
+
+.select-div{
+  left: 0px;
+  margin-left: 5px;
+  width: 20%;
+  padding: 0 0 0 0;
+  display: inline-block;
+  margin-left: 30px;
+}
+
+.time-select .mat-select-value {
+  color:  #009e6c !important;
+  font-size: 12px;
+}
+
+.form-field.mat-form-field-appearance-legacy .mat-form-field-label {
+  color: #FFFFFF !important;
+}
+
+.form-field.mat-form-field.mat-focused .mat-form-field-label {
+  color: #00B2A9 !important;
+}
+
+.form-field.mat-form-field.mat-focused .mat-form-field-underline {
+  //color: #3c7fca !important;
+  color: #00B2A9 !important;
+}
+
+.form-field.mat-form-field-appearance-legacy .mat-form-field-underline {
+  //background-color: #3c7fca !important;
+  background-color: #FFFFFF !important;
 }
 
 .lds-circle {

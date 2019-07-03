@@ -24,7 +24,7 @@
     <ngx-datatable-column name="Setor" prop="sector" [sortable]="tableSortable"></ngx-datatable-column>
     <ngx-datatable-column name="Preço" prop="price" [sortable]="tableSortable">
       <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row" prop="price">
-        {{companies[rowIndex].stock.price | currency:'BRL':true:'1.2-2'}}
+        {{companies[rowIndex].stock.price | currency:'BRL':'symbol':'1.2-2'}}
       </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="Variação(%)" prop="changePercent" [sortable]="tableSortable">

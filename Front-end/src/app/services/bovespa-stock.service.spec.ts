@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EmpresaService } from './empresa.service';
+import { BovespaStockService } from './bovespa-stock.service';
 
-describe('EmpresaService', () => {
+describe('BovespaStockService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: EmpresaService = TestBed.get(EmpresaService);
+    const service: BovespaStockService = TestBed.get(BovespaStockService);
     expect(service).toBeTruthy();
   });
 });

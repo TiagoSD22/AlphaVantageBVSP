@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ConfigService } from './../../shared/config.service';
+import { ConfigService } from '../shared/config.service';
 import { HttpClient } from '@angular/common/http';
-import { StockQuoteData } from '../../models/stock-quote-data';
+import { StockQuoteData } from '../models/stock-quote-data';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CotacaoBovespaService {
+export class BovespaStockService {
 
   private bvspIntradayUrl : string = "";
 

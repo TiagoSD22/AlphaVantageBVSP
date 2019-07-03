@@ -5,8 +5,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import {ToastrModule} from 'ngx-toastr';
-import { EmpresasModule } from './pages/empresas/empresas.module';
-import { CotacaoBovespaModule } from './pages/cotacao-bovespa/cotacao-bovespa.module';
+import { CompaniesModule } from './pages/companies/companies.module';
+import { BovespaStockModule } from './pages/bovespa-stock/bovespa-stock.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,8 +15,8 @@ import { CotacaoBovespaModule } from './pages/cotacao-bovespa/cotacao-bovespa.mo
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    CotacaoBovespaModule,
-    EmpresasModule,
+    CompaniesModule,
+    BovespaStockModule,
     ToastrModule.forRoot()
   ],
   bootstrap: [AppComponent]

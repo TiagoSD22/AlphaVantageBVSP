@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CotacaoBovespaComponent } from './cotacao-bovespa.component';
+import { BovespaStockComponent } from './bovespa-stock.component';
 import {registerLocaleData} from '@angular/common';
 import br from '@angular/common/locales/br';
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import stock from 'highcharts/modules/stock.src';
 import more from 'highcharts/highcharts-more.src';
-import {MatCardModule} from '@angular/material/card';
+import {MatCardModule, MatSelectModule, MatButtonModule} from '@angular/material';
 
 registerLocaleData(br, 'pt-BR');
 
@@ -19,11 +19,13 @@ export function highchartsModules() {
   imports: [
     CommonModule,
     ChartModule,
-    MatCardModule
+    MatCardModule,
+    MatSelectModule,
+    MatButtonModule
   ],
-  declarations: [CotacaoBovespaComponent],
+  declarations: [BovespaStockComponent],
   providers: [
     { provide: HIGHCHARTS_MODULES, useFactory: highchartsModules } // add as factory to your providers
   ]
 })
-export class CotacaoBovespaModule { }
+export class BovespaStockModule { }

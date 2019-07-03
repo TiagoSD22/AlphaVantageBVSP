@@ -1,13 +1,13 @@
-import { ConfigService } from './../../shared/config.service';
+import { ConfigService } from '../shared/config.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Empresa } from './empresa';
-import { CompanyStock } from "./company-stock";
+import { CompanyStock } from "../models/company-stock";
+import { Company } from '../models/company';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EmpresaService {
+export class CompanyService {
 
   private topCompanyUrl : string = "";
   private companyStockUrl : string = "";
@@ -20,7 +20,7 @@ export class EmpresaService {
    }
 
    getTopCompany(){
-     return this.http.get<Array<Empresa>>(this.topCompanyUrl);
+     return this.http.get<Array<Company>>(this.topCompanyUrl);
    }
 
    getCompanyStock(companySymbol : string){
