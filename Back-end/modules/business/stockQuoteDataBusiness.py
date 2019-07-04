@@ -24,5 +24,8 @@ def convertDictToStockQuoteDataList(dictionary : dict):
 # para uma série intraday do dia 26, pode haver dados dos dias 25, 24 ou até muito antes, este método retorna
 # apenas a série referente ao último dia
 def getOnlyLastDailyData(stockList : list):
-    lastDaily : list = filter(lambda stock : stock.getTimeStamp().day == stockList[0].getTimeStamp().day, stockList)
+    latStockDate : datetime = stockList[0].getTimeStamp()
+    lastDaily : list = filter(lambda stock : stock.getTimeStamp().day == latStockDate.day and 
+                                             stock.getTimeStamp().month == latStockDate.month and
+                                             stock.getTimeStamp().year == latStockDate.year, stockList)
     return lastDaily
