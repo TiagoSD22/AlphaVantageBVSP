@@ -34,3 +34,9 @@
       transform: rotateY(3600deg);
     }
   }
+
+.ngx-datatable.material {
+    background: #FFF;
+    -webkit-box-shadow: 0 5px 5px -3px rgba(0, 253, 0, 0.2), 0 8px 10px 1px rgba(0, 210, 120, 0.14), 0 3px 14px 2px rgba(0, 200, 120, 0.12);
+    box-shadow: 0 5px 5px -3px rgba(0, 253, 0, 0.2), 0 8px 10px 1px rgba(0, 210, 120, 0.14), 0 3px 14px 2px rgba(0, 200, 120, 0.12)
+}

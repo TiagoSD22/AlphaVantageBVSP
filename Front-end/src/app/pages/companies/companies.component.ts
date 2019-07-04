@@ -74,10 +74,11 @@ export class CompaniesComponent implements OnInit, AfterViewInit {
   onSort(event) {
     let sortEvent = event.sorts[0];
     this.sortData(sortEvent);
+    this.changeDetectorRefs.detectChanges();
   }
 
   sortData(sortEvent) {
-    let data = this.companies
+    let data = this.companies;
     this.companies = data.sort((a, b) => {
       const isAsc = sortEvent.dir === 'asc';
       switch (sortEvent.prop) {
