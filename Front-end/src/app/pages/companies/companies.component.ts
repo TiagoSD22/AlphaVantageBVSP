@@ -5,7 +5,7 @@ import { CompanyStock } from '../../models/company-stock';
 import { Company } from '../../models/company';
 
 @Component({
-  selector: 'app-empresas',
+  selector: 'app-companies',
   templateUrl: './companies.component.html',
   styleUrls: ['./companies.component.scss']
 })
@@ -16,7 +16,7 @@ export class CompaniesComponent implements OnInit, AfterViewInit {
   companies : Array<Company> = [];
   tableSortable : boolean = true;
 
-  constructor(private empresaService : CompanyService,
+  constructor(private companyService : CompanyService,
               private toastr : ToastrService,
               private changeDetectorRefs: ChangeDetectorRef) { }
 
@@ -25,7 +25,7 @@ export class CompaniesComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.loadIndicator = true
-    this.empresaService.getTopCompany().subscribe(res => {
+    this.companyService.getTopCompany().subscribe(res => {
       this.companies = res["empresas"];
       this.loading = false;
       this.loadIndicator = false;
@@ -42,7 +42,7 @@ export class CompaniesComponent implements OnInit, AfterViewInit {
   getCompanyStock(rowIndex){
     this.loadIndicator = true;
     let symbol = this.companies[rowIndex].symbol
-    this.empresaService.getCompanyStock(symbol).subscribe(res => {
+    this.companyService.getCompanyStock(symbol).subscribe(res => {
       let resJson = res["stock"];
       this.companies[rowIndex].stock.price = resJson["price"];
       this.companies[rowIndex].stock.change = resJson["change"];
@@ -62,7 +62,7 @@ export class CompaniesComponent implements OnInit, AfterViewInit {
 
   updateCompanyStock(rowIndex){
     let stock : CompanyStock = this.companies[rowIndex].stock;
-    this.empresaService.updateCompanyStock(stock).subscribe(res => {
+    this.companyService.updateCompanyStock(stock).subscribe(res => {
       this.toastr.clear();
       this.toastr.success("Dados atualizados em banco com sucesso!", "Ok", { progressBar: true, timeOut: 2000 });
     },error =>{
