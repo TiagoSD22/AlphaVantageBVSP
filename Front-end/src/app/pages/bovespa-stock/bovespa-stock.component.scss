@@ -57,21 +57,38 @@
 }
 
 .form-field.mat-form-field-appearance-legacy .mat-form-field-label {
-  color: #FFFFFF !important;
+  color: #00B2A9 !important;
 }
 
 .form-field.mat-form-field.mat-focused .mat-form-field-label {
   color: #00B2A9 !important;
 }
 
-.form-field.mat-form-field.mat-focused .mat-form-field-underline {
-  //color: #3c7fca !important;
-  color: #00B2A9 !important;
+.form-field.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: #FFFFFF !important;
 }
 
-.form-field.mat-form-field-appearance-legacy .mat-form-field-underline {
-  //background-color: #3c7fca !important;
-  background-color: #FFFFFF !important;
+.mat-select-arrow {
+  color: gray !important;
+}
+
+/* to change underline when focused */
+.mat-select:focus:not(.mat-select-disabled).mat-primary .mat-select-underline {
+  background-color: #63961C !important;
+}
+
+/* to change plceholder text when focused */
+.mat-select:focus:not(.mat-select-disabled).mat-primary .mat-select-trigger {
+  color: #63961C;
+}
+
+/* to change selected item color in the select list */
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #63961C;
+}
+
+.mat-form-field-ripple {
+  background-color: #00d1b2  !important;
 }
 
 .lds-circle {
