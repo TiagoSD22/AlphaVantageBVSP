@@ -76,7 +76,64 @@
                 </i>
             </button>
         </div>
-        <div *ngIf="graphLoaded" [chart]="stock" style="margin-bottom: 10px;"></div>
+
+        <mat-tab-group [color] = "primary" [backgroundColor] = "primary" style="background: #4d4d4d;">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>show_chart</mat-icon>
+                    Gráfico
+                </ng-template>
+                <div *ngIf="graphLoaded" [chart]="stock" style="margin-bottom: 10px;"></div>
+            </mat-tab>
+        
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>list</mat-icon>
+                    Detalhes
+                </ng-template>
+                <ngx-datatable #table
+                    (sort)="onSort($event)"  
+                    [columnMode]="'force'" 
+                    [count]="stockData?.length" 
+                    [loadingIndicator]="loadIndicator" 
+                    [messages]="{emptyMessage: 'Sem pontos registrados', totalMessage: ' dados recebidos no dia'}"
+                    [footerHeight]="50" 
+                    [headerHeight]="50"
+                    [rowHeight]="'auto'"
+                    [externalPaging]="false"
+                    [limit]="10" 
+                    [rows]="stockData.reverse()"
+                    [trackByProp]="timeStamp" 
+                    class="material striped"
+                    style="width: 100%">
+                    <ngx-datatable-column name="Data (período)" prop="timeStamp" [sortable]="tableSortable">
+                        <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row" prop="timeStamp">
+                            {{stockData[rowIndex].timeStamp | date : 'dd/MM/yy HH:mm'}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Pontos (do período)" prop="close" [sortable]="tableSortable">
+                        <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row" prop="close">
+                            {{stockData[rowIndex].close | number : '1.2-4'}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Abertura (do período)" prop="open" [sortable]="tableSortable">
+                        <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row" prop="close">
+                            {{stockData[rowIndex].open | number : '1.2-4'}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Alta (do período)" prop="high" [sortable]="tableSortable">
+                        <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row" prop="high">
+                            {{stockData[rowIndex].high | number : '1.2-4'}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Baixa (do período)" prop="low" [sortable]="tableSortable">
+                        <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row" prop="low">
+                            {{stockData[rowIndex].low | number : '1.2-4'}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </mat-tab>
+        </mat-tab-group>
 
         <div *ngIf="!graphLoaded" class="load-wrapper">
             <div class="lds-circle">

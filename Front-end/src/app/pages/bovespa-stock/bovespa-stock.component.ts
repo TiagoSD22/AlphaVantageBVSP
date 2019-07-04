@@ -25,6 +25,7 @@ export class BovespaStockComponent implements OnInit, AfterViewInit {
   graphLoaded : boolean = false;
   timeInterval : number = 1;
   useDefaultInterval : boolean = true;
+  tableSortable : boolean = false;
 
   constructor(private cotacaoService : BovespaStockService,
               private toastr : ToastrService) { }

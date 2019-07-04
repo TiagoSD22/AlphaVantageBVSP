@@ -18,6 +18,9 @@
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/src/themes/material.scss';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
 
 #toast-container > div {
   opacity:1;
@@ -186,3 +189,415 @@ cursor: move !important;
     color: #3c7fca;
     border: 1px solid #3c7fca;
 }
+
+.ngx-datatable.material {
+  background: #fff;
+  box-shadow: none;
+  font-size: 15px;
+  color: #37576d;
+
+  &.striped {
+    .datatable-row-odd {
+      background: #eef5f9;
+    }
+  }
+
+  &.multi-click-selection,
+  &.multi-selection,
+  &.single-selection {
+    .datatable-body-row {
+      &.active,
+    &.active .datatable-row-group {
+      background-color: #2196f3;
+      color: #000000;
+    }
+
+    &.active:hover,
+    &.active:hover .datatable-row-group {
+      background-color: #2196f3;
+      color: #000000;
+    }
+
+    &.active:focus,
+    &.active:focus .datatable-row-group {
+      background-color: #2196f3;
+      color: #000000;
+    }
+    }
+  }
+
+  &:not(.cell-selection) {
+    .datatable-body-row {
+      &:hover,
+      &:hover .datatable-row-group {
+        background-color: #eef5f9;
+        transition-property: background;
+        transition-duration: 0.3s;
+        transition-timing-function: linear;
+      }
+
+      &:focus,
+      &:focus .datatable-row-group {
+        background-color: #eef5f9;
+      }
+    }
+  }
+
+  &.cell-selection {
+    .datatable-body-cell {
+      &:hover,
+      &:hover .datatable-row-group {
+        background-color: #eef5f9;
+        transition-property: background;
+        transition-duration: 0.3s;
+        transition-timing-function: linear;
+      }
+
+      &:focus,
+      &:focus .datatable-row-group {
+        background-color: #eef5f9;
+      }
+
+      &.active,
+      &.active .datatable-row-group {
+        background-color: #304ffe;
+        color: #fff;
+      }
+
+      &.active:hover,
+      &.active:hover .datatable-row-group {
+        background-color: #193ae4;
+        color: #fff;
+      }
+
+      &.active:focus,
+      &.active:focus .datatable-row-group {
+        background-color: #2041ef;
+        color: #fff;
+      }
+    }
+  }
+  /**
+  * Shared Styles
+  */
+  .empty-row {
+    height: 50px;
+    text-align: left;
+    padding: 10px;
+    vertical-align: top;
+    border-top: 0;
+  }
+
+  .loading-row {
+    text-align: left;
+    padding: 0.5rem 1.2rem;
+    vertical-align: top;
+    border-top: 0;
+  }
+  /**
+  * Global Row Styles
+  */
+  .datatable-body,
+  .datatable-header {
+    .datatable-row-left {
+      background-color: #fff;
+      background-position: 100% 0;
+      background-repeat: repeat-y;
+      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==");
+    }
+
+    .datatable-row-right {
+      background-position: 0 0;
+      background-color: #fff;
+      background-repeat: repeat-y;
+      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQI12PQkNdi1VTQ5gbSwkAsDQARLAIGtOSFUAAAAABJRU5ErkJggg==");
+    }
+  }
+  /**
+  * Header Styles
+  */
+  .datatable-header {
+    border-bottom: 1px solid #d7e1ed;
+    font-weight: 600;
+    vertical-align: middle;
+    display: table-cell;
+
+    .datatable-header-cell {
+      text-align: left;
+      padding: 10px;
+      font-weight: 600;
+      vertical-align: middle;
+      min-height: 60px;
+
+      .datatable-header-cell-wrapper {
+        position: relative;
+      }
+
+      &.longpress {
+        .draggable::after {
+          transition: transform 400ms ease, opacity 400ms ease;
+          opacity: 0.5;
+          transform: scale(1);
+        }
+      }
+
+      .draggable::after {
+        content: " ";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -30px 0 0 -30px;
+        height: 60px;
+        width: 60px;
+        background: #eef5f9;
+        border-radius: 100%;
+        opacity: 1;
+        filter: none;
+        transform: scale(0);
+        z-index: 9999;
+        pointer-events: none;
+      }
+
+      &.dragging {
+        .resize-handle {
+          border-right: none;
+        }
+      }
+    }
+
+    .resize-handle {
+      border-right: solid 1px #eef5f9;
+    }
+  }
+  /**
+  * Body Styles
+  */
+  .datatable-row-wrapper {
+    border-bottom: 1px solid #d7e1ed;
+    &:last-child {
+      border: none;
+    }
+  }
+  .datatable-body {
+    .datatable-row-detail {
+      background: #f5f5f5;
+      padding: 10px;
+    }
+
+    .datatable-body-row {
+      .datatable-body-cell {
+        text-align: left;
+        padding: 10px;
+        vertical-align: top;
+        border-top: 0;
+        -webkit-transition: width 0.3s ease;
+        transition: width 0.3s ease;
+
+        &[ng-reflect-is-selected="true"] {
+          background: #e3ecf7;
+        }
+      }
+    }
+
+    .progress-linear {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 5px;
+      padding: 0;
+      margin: 0;
+      position: absolute;
+
+      .container {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 5px;
+        -webkit-transform: translate(0, 0) scale(1, 1);
+        transform: translate(0, 0) scale(1, 1);
+        background-color: rgb(170, 209, 249);
+
+        .bar {
+          transition: all 0.2s linear;
+          -webkit-animation: query 0.8s infinite cubic-bezier(.39, .575, .565, 1);
+          animation: query 0.8s infinite cubic-bezier(.39, .575, .565, 1);
+          transition: -webkit-transform 0.2s linear;
+          transition: transform 0.2s linear;
+          background-color: rgb(16, 108, 200);
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 100%;
+          height: 5px;
+        }
+      }
+    }
+  }
+  /**
+  * Footer Styles
+  */
+  .datatable-footer {
+    font-size: 13px;
+
+    .page-count {
+      line-height: 50px;
+      height: 50px;
+      padding: 0 1.2rem;
+    }
+
+    .datatable-pager {
+      margin: 0 10px;
+      vertical-align: top;
+      ul {
+        li {
+          margin: 10px 0px;
+          &:not(.disabled) {
+            &.active{
+              a {
+                background-color: #00d1b2;
+                font-weight: bold;
+              }
+            }
+            &:hover {
+              a {
+                background-color: #63961C;
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+
+      a {
+        height: 22px;
+        min-width: 24px;
+        line-height: 22px;
+        padding: 0 6px;
+        border-radius: 3px;
+        margin: 6px 3px;
+        text-align: center;
+        vertical-align: top;
+        color: rgba(0, 0, 0, .54);
+        text-decoration: none;
+        vertical-align: bottom;
+
+        &:hover {
+          color: rgba(0, 0, 0, .75);
+          background-color: rgba(158, 158, 158, 0.2);
+        }
+      }
+
+      .datatable-icon-left,
+      .datatable-icon-prev,
+      .datatable-icon-right,
+      .datatable-icon-skip {
+        font-size: 20px;
+        line-height: 20px;
+        padding: 0 3px;
+      }
+    }
+  }
+
+  a.icon {
+    border: none;
+    border-radius: 100%;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    line-height: 37px;
+    text-indent: 6px;
+    font-size: 22px;
+
+    &:hover {
+      background: #688696;
+      color: #fff;
+    }
+  }
+}
+
+.data-filter-wrapper {
+  display: none;
+
+  .filter-icons {
+    top: 31px;
+    margin-top: -15px;
+    line-height: 30px;
+    margin-right: 10px;
+    font-size: 25px;
+    position: absolute;
+    z-index: 100;
+  }
+
+  .search {
+    left: 15px;
+    right: auto;
+  }
+
+  .close {
+    right: 15px;
+    left: auto;
+  }
+
+  .data-filter {
+    padding: 8px;
+    margin: 15px auto;
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    z-index: 99;
+    top: -15px;
+    border: none;
+    text-indent: 45px;
+    background-color: #e3ecf7;
+    background-image: none;
+  }
+
+  &.active {
+    display: block;
+  }
+}
+
+.ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
+  overflow: initial;
+}
+
+.ngx-datatable .datatable-body .datatable-body-row > div {
+  display: table;
+}
+
+.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell {
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.float-auto .mat-input-wrapper {
+  padding-bottom: 1.3rem !important;
+  width: 100%;
+}
+
+/**
+* Progress bar animations
+*/
+@keyframes query {
+  0% {
+    opacity: 1;
+    transform: translateX(35%) scale(.3, 1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0, 1);
+  }
+}
+
+[class*=" datatable-icon-"]:before,
+[class^="datatable-icon-"]:before {
+  font-size: 25px;
+}
+
+.id-form{
+  width: 10%;
+}
+

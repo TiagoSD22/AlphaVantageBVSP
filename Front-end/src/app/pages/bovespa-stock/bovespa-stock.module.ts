@@ -6,7 +6,8 @@ import br from '@angular/common/locales/br';
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import stock from 'highcharts/modules/stock.src';
 import more from 'highcharts/highcharts-more.src';
-import {MatCardModule, MatSelectModule, MatButtonModule} from '@angular/material';
+import { NgxDatatableModule } from "@swimlane/ngx-datatable";
+import {MatCardModule, MatSelectModule, MatButtonModule, MatTabsModule, MatIconModule} from '@angular/material';
 
 registerLocaleData(br, 'pt-BR');
 
@@ -21,7 +22,10 @@ export function highchartsModules() {
     ChartModule,
     MatCardModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTabsModule,
+    MatIconModule,
+    NgxDatatableModule
   ],
   declarations: [BovespaStockComponent],
   providers: [
