@@ -123,12 +123,12 @@ Dentro da pasta /tests localizada em /Back-end/modules existe um arquivo feito c
 
 #### Screenshots da aplicação
 
-![Tela de exibição do Ibovespa](https://i.imgur.com/2B9WbdS.png)
+![Tela de exibição do Ibovespa](https://i.imgur.com/kcdYjuP.png)
   *Tela de exibição do Ibovespa do dia*
 
 ---  
   
-![Tela de cotações de empresas](https://i.imgur.com/l82q7wI.png)
+![Tela de cotações de empresas](https://i.imgur.com/zJXACGj.png)
   *Tela de cotações das 10 maiores empresas brasileiras. Na coluna de **Ações**, o botão à esquerda obtém a cotação atual da empresa selecionada e o botão à direita envia esses dados para serem persistidos em banco.*
   
 ###### Considerações finais
