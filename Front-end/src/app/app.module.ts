@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {ToastrModule} from 'ngx-toastr';
 import { CompaniesModule } from './pages/companies/companies.module';
 import { BovespaStockModule } from './pages/bovespa-stock/bovespa-stock.module';
+import {MatToolbarModule, MatIconModule} from '@angular/material';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,8 @@ import { BovespaStockModule } from './pages/bovespa-stock/bovespa-stock.module';
     HttpClientModule,
     CompaniesModule,
     BovespaStockModule,
+    MatToolbarModule,
+    MatIconModule,
     ToastrModule.forRoot()
   ],
   bootstrap: [AppComponent]

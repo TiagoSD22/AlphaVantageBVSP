@@ -5,7 +5,7 @@ from modules.utils import config
 
 if __name__ == "__main__":
     result : bool = asyncio.run(migration.init())
-    if(result):
+    if result:
         print("Iniciando API, acesse-a no endereço configurado como cliente. [padrão: http://localhost:4200]")
         app = api.createApp()
         host = config.getApplicationHost()

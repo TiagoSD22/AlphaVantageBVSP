@@ -95,13 +95,10 @@ export class BovespaStockComponent implements OnInit, AfterViewInit {
 
   updateStockChart(){
     this.stock.options.series[0].data = [];
-    let data = this.stockData.map(stock => {
-      return [Date.parse(stock.timeStamp), +stock.close];
+    this.stockData.map(stock => {
+      let point : [number, number] = [Date.parse(stock.timeStamp), +stock.close];
+      this.stock.options.series[0].data.push([point[0], point[1]])
     });
-    
-    data.forEach(d => {
-      this.stock.options.series[0].data.push([d[0], d[1]]);
-    })
 
     this.stock.options.plotOptions.line.color = this.variation > 0? "green" : "red";
   }

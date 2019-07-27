@@ -1,66 +1,81 @@
-<div *ngIf="loading" class="load-wrapper">
-  <div class="lds-circle">
-    <div></div>
-  </div>
-</div>
+<div class="fullWidth3-wrapper" id="content_wrapper">
+  <div class="content">
 
-<div *ngIf="!loading">
-  <ngx-datatable #table
-    (sort)="onSort($event)"  
-    [columnMode]="'force'" 
-    [count]="companies?.length" 
-    [loadingIndicator]="loadIndicator" 
-    [messages]="{emptyMessage: 'Nenhuma empresa recebida', totalMessage: ' maiores empresas brasileiras'}"
-    [footerHeight]="50" 
-    [headerHeight]="50"
-    [rowHeight]="'auto'" 
-    [rows]="companies"
-    [trackByProp]="rank" 
-    class="material striped"
-    style="width: 100%">
-    <ngx-datatable-column name="Rank" prop="rank" [sortable]="tableSortable"></ngx-datatable-column>
-    <ngx-datatable-column name="Nome" prop="name" [sortable]="tableSortable" class="text-center"></ngx-datatable-column>
-    <ngx-datatable-column name="Símbolo" prop="symbol" [sortable]="tableSortable"></ngx-datatable-column>
-    <ngx-datatable-column name="Região" prop="region" [sortable]="tableSortable"></ngx-datatable-column>
-    <ngx-datatable-column name="Setor" prop="sector" [sortable]="tableSortable"></ngx-datatable-column>
-    <ngx-datatable-column name="Preço" prop="price" [sortable]="tableSortable">
-      <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row" prop="price">
-        {{companies[rowIndex].stock.price | currency:'BRL':'symbol':'1.2-2'}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Variação(%)" prop="changePercent" [sortable]="tableSortable">
-      <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row" prop="changePercent">
-        <h5 *ngIf="companies[rowIndex].stock.changePercent != null && companies[rowIndex].stock.changePercent <= 0" style="font-size: 16px;color: red;">
-          {{companies[rowIndex].stock.changePercent | number : '1.2-4'}}%
-        </h5>
-        <h5 *ngIf="companies[rowIndex].stock.changePercent != null && companies[rowIndex].stock.changePercent > 0" style="font-size: 16px;color: green;">
-          +{{companies[rowIndex].stock.changePercent | number : '1.2-4'}}%
-        </h5>
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Atualizado em" prop="lastUpdate" [sortable]="tableSortable">
-      <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row" prop="lastUpdate">
-        {{companies[rowIndex].stock.lastUpdate | date : 'dd/MM/yy'}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Ações" [sortable]="false">
-      <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row">
-        <span  class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Pesquisar a cotação atual desta empresa">
-          <button (click)="getCompanyStock(rowIndex)" mat-icon-button>
-            <i class="material-icons">
-              remove_red_eye
-            </i>
-          </button>
-        </span>
+    <div *ngIf="loading" class="load-wrapper">
+      <div class="lds-circle">
+        <div></div>
+      </div>
+    </div>
 
-        <span *ngIf="companies[rowIndex].stock.lastUpdate.length > 0" class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Atualizar em banco os dados desta empresa">
-          <button (click)="updateCompanyStock(rowIndex)" mat-icon-button>
-            <i class="material-icons">
-              sync
-            </i>
-          </button>
-        </span>
-      </ng-template>
-    </ngx-datatable-column>
-  </ngx-datatable>
+    <div class="content-body" style="padding-bottom: 0px;" *ngIf="!loading">
+        <div class="card card-datatable">
+            <header class="card-header p-20">
+                <h2 class="card-title">
+                    Top 10 empresas brasileiras de 2019
+                </h2>
+            </header>
+            <div class="card-block p-0 div-tabela">
+                <ngx-datatable #table
+                (sort)="onSort($event)"  
+                [columnMode]="'force'" 
+                [count]="companies?.length" 
+                [loadingIndicator]="loadIndicator" 
+                [messages]="{emptyMessage: 'Nenhuma empresa recebida', totalMessage: ' maiores empresas brasileiras'}"
+                [footerHeight]="50" 
+                [headerHeight]="50"
+                [rowHeight]="'auto'" 
+                [rows]="companies"
+                [trackByProp]="rank" 
+                class="material striped"
+                style="width: 100%">
+                <ngx-datatable-column name="Rank" prop="rank" [sortable]="tableSortable"></ngx-datatable-column>
+                <ngx-datatable-column name="Nome" prop="name" [sortable]="tableSortable" class="text-center"></ngx-datatable-column>
+                <ngx-datatable-column name="Símbolo" prop="symbol" [sortable]="tableSortable"></ngx-datatable-column>
+                <ngx-datatable-column name="Região" prop="region" [sortable]="tableSortable"></ngx-datatable-column>
+                <ngx-datatable-column name="Setor" prop="sector" [sortable]="tableSortable"></ngx-datatable-column>
+                <ngx-datatable-column name="Preço" prop="price" [sortable]="tableSortable">
+                  <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row" prop="price">
+                    {{companies[rowIndex].stock.price | currency:'BRL':'symbol':'1.2-2'}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Variação(%)" prop="changePercent" [sortable]="tableSortable">
+                  <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row" prop="changePercent">
+                    <h5 *ngIf="companies[rowIndex].stock.changePercent != null && companies[rowIndex].stock.changePercent <= 0" style="font-size: 16px;color: red;">
+                      {{companies[rowIndex].stock.changePercent | number : '1.2-4'}}%
+                    </h5>
+                    <h5 *ngIf="companies[rowIndex].stock.changePercent != null && companies[rowIndex].stock.changePercent > 0" style="font-size: 16px;color: green;">
+                      +{{companies[rowIndex].stock.changePercent | number : '1.2-4'}}%
+                    </h5>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Atualizado em" prop="lastUpdate" [sortable]="tableSortable">
+                  <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row" prop="lastUpdate">
+                    {{companies[rowIndex].stock.lastUpdate | date : 'dd/MM/yy'}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Ações" [sortable]="false">
+                  <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex" let-row="row">
+                    <span  class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Pesquisar a cotação atual desta empresa">
+                      <button (click)="getCompanyStock(rowIndex)" mat-icon-button>
+                        <i class="material-icons">
+                          remove_red_eye
+                        </i>
+                      </button>
+                    </span>
+            
+                    <span *ngIf="companies[rowIndex].stock.lastUpdate.length > 0" class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Atualizar em banco os dados desta empresa">
+                      <button (click)="updateCompanyStock(rowIndex)" mat-icon-button>
+                        <i class="material-icons">
+                          sync
+                        </i>
+                      </button>
+                    </span>
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
+            </div>
+        </div>
+    </div>
+
+    </div>
 </div>

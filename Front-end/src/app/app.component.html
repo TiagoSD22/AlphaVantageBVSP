@@ -1,33 +1,39 @@
-<nav class="navbar menu">
-  <!-- logo -->
-  <div class="navbar-brand" style="margin-right: 0px;">
-    <a class="navbar-item">
-      <img style="width: 32px; height: 32px;" src="assets/images/icon.png">
-    </a>
-  </div>
-  <!-- menu -->
-  <div class="navbar-menu">
-    <div class="navbar-start">
-      <a class="navbar-item" routerLink="/cotacao-bovespa">
-        <i style="vertical-align: middle;" class="material-icons">
-          timeline
-        </i>
-        Bovespa
-      </a>
-      <a class="navbar-item" routerLink="/empresas">
-        <i style="vertical-align: middle;" class="material-icons">
-          work
-        </i>
-        Empresas
-      </a>
-    </div>
-  </div>
+<nav class="navbar menu mat-elevation-z6">
+        <!-- logo -->
+        <div class="navbar-brand">
+          <a class="navbar-item" style="padding: 0 0 0 0;">
+            <img style="width: 50px; height: 50px;" src="assets/images/icon2.png">
+          </a>
+        </div>
+        <!-- menu -->
+        <div class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" routerLink="/cotacao-bovespa">
+              <i style="vertical-align: middle;" class="material-icons">
+                timeline
+              </i>
+              Bovespa
+            </a>
+            <a class="navbar-item" routerLink="/empresas">
+              <i style="vertical-align: middle;" class="material-icons">
+                work
+              </i>
+              Empresas
+            </a>
+          </div>
+        </div>
 </nav>
 
-<router-outlet></router-outlet>
+<div class="body">
+  <router-outlet></router-outlet>
+</div>
 
 <div class="bottom">
   <h5 style="font-size: 12px; margin-bottom: 0px;margin-left: 20px;display: inline-block;">
     Dados fornecidos pela <a href="https://www.alphavantage.co/" target="_blank"><i style="color: white;"> Alpha Vantage</i></a>
   </h5>
 </div>
+
+
+
+

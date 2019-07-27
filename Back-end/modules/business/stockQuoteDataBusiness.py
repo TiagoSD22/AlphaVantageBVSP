@@ -25,7 +25,5 @@ def convertDictToStockQuoteDataList(dictionary : dict):
 # apenas a série referente ao último dia
 def getOnlyLastDailyData(stockList : list):
     latStockDate : datetime = stockList[0].getTimeStamp()
-    lastDaily : list = filter(lambda stock : stock.getTimeStamp().day == latStockDate.day and 
-                                             stock.getTimeStamp().month == latStockDate.month and
-                                             stock.getTimeStamp().year == latStockDate.year, stockList)
+    lastDaily : list = list(filter(lambda stock : ((latStockDate - stock.getTimeStamp()).total_seconds())/86400 < 1 and latStockDate.day == stock.getTimeStamp().day, stockList))
     return lastDaily
