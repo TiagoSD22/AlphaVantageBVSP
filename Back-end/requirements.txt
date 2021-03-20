@@ -1,7 +1,7 @@
 aiohttp==3.5.4
 async-timeout==3.0.1
 asyncpg==0.18.3
-Jinja2==2.10
+Jinja2==2.11.3
 marshmallow==3.0.0rc7
 more-itertools==7.1.0
 pytest==5.0.0
