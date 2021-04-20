@@ -1,6 +1,6 @@
 aiohttp==3.5.4
 async-timeout==3.0.1
-asyncpg==0.18.3
+asyncpg==0.21.0
 Jinja2==2.10
 marshmallow==3.0.0rc7
 more-itertools==7.1.0
