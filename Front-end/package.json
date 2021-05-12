@@ -36,7 +36,7 @@
     "angular2-text-mask": "^8.0.5",
     "angular2-wizard": "^0.4.0",
     "bootstrap": "^4.0.0",
-    "chart.js": "^2.7.2",
+    "chart.js": "^2.9.4",
     "compass-mixins": "^0.12.10",
     "core-js": "^2.5.7",
     "css-loader": "^0.28.11",
